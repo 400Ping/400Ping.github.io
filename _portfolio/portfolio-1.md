@@ -1,7 +1,15 @@
 ---
-title: "Portfolio item number 1"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
+title: "RISC-V Combination and Permutation program"
+excerpt: "A RISC-V program that calculates Combination and Permutation<br/>"
 collection: portfolio
 ---
 
-This is an item in your portfolio. It can be have images or nice text. If you name the file .md, it will be parsed as markdown. If you name the file .html, it will be parsed as HTML. 
+[More information here](https://github.com/zer08t7/Combination-and-Permutation)
+
+This is a RISC-V based program that calculates Combination, Permutation and its repeated form
+
+<img src='/images/Hint.png'>
+
+The Detailed code is in my Github repo and here are some screenshots of the Demo down below
+
+<img src='/images/demo.png'>
