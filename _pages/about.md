@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "About Zer0"
+title: "About Ping"
 author_profile: true
 redirect_from: 
   - /about/
