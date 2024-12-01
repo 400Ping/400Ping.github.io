@@ -16,7 +16,7 @@ Education
 Work experience
 ======
 * Spring 2024: Teaching Assistant, MY Camp
-  * MIT x YZU Collaboration Program
+  * MIT x YZU Collaboration Summer Program
   * Duties includes: 
     * Providing guidance and instruction to students
     * Arranging activities within course curricula
@@ -24,17 +24,17 @@ Work experience
     * Managing classroom essentials and additional equipment
     * Overseeing software and hardware requirements for computer labs, including maintenance and upgrades
 
-* Summer 2024: Guest Speaker, COSCUP
+* Summer 2024: Speaker, COSCUP
   * Talk: RISC-V for Beginners: A Journey Through Concepts and Creations
+
+* October 2024: Undergraduate Researcher, YZU Intelligent Computing Lab
+  * Working on waste detection app using YOLO
   
 Skills
 ======
 * C/C++
 * Python
 * Game Design
-  * Unity
-  * C#
-  * AR
 * RISC-V
 * Data Structures
 * Algorithms
