@@ -1,6 +1,6 @@
 // Site-wide constants — edit here.
 export const SITE = {
-  title: '400ping',
+  title: "Jie-Kai Chang's Website",
   author: 'Jie-Kai Chang',
   tagline: 'Distributed systems, Kubernetes operators, and GPU/CUDA for ML systems.',
   description:
@@ -9,8 +9,8 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/cv/', label: 'CV' },
   { href: '/blog/', label: 'Blog' },
+  { href: '/cv/', label: 'CV' },
 ];
 
 export const SOCIAL_LINKS = [
