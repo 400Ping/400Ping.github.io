@@ -2,9 +2,9 @@
 export const SITE = {
   title: "Jie-Kai Chang's Website",
   author: 'Jie-Kai Chang',
-  tagline: 'Distributed systems, Kubernetes operators, and GPU/CUDA for ML systems.',
+  tagline: 'LLM/ML, computer vision, and GPU-acceleration research, plus the AI/ML infrastructure behind it.',
   description:
-    'Jie-Kai Chang (400Ping) — Apache Mahout PMC & Committer, Ray / KubeRay contributor. Distributed systems, Kubernetes operators, and GPU/CUDA performance for ML systems.',
+    'Jie-Kai Chang (400Ping) — research in LLMs, machine learning, computer vision, and GPU acceleration, plus the AI/ML infrastructure behind it. Apache Mahout PMC & Committer; Ray / KubeRay contributor.',
 };
 
 export const NAV_LINKS = [

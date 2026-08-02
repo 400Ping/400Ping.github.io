@@ -17,13 +17,13 @@ export const PROFILE = {
 
 // One-line tagline for the home hero.
 export const TAGLINE =
-  'I build and break machine-learning infrastructure — from GPU kernels to cluster orchestration.';
+  'I research LLMs, machine learning, and computer vision — accelerated on GPUs — and build the AI/ML infrastructure behind it.';
 
 // Short friendly intro shown under the tagline on the home page.
 export const HOME_INTRO =
-  `I'm an EE undergrad and open-source systems engineer. I spend most of my time in the guts of
-   distributed ML infrastructure — Apache Mahout, Ray, and KubeRay — making it faster and harder
-   to break.`;
+  `I'm an EE undergrad researching LLMs, machine learning, and computer vision, with a focus on
+   GPU acceleration — and I build the AI/ML infrastructure that makes that research run. Much of
+   that infrastructure work is open source, across Apache Mahout, Ray, and KubeRay.`;
 
 // Home landing highlights.
 export const STATS = [
@@ -32,19 +32,23 @@ export const STATS = [
   { value: '3', label: 'Major projects' },
 ];
 
-// Focus areas shown on the home page.
+// Focus areas.
 export const FOCUS = [
   {
-    title: 'Distributed systems',
-    desc: 'Ray Core, GCS, and the machinery that keeps large clusters coordinated and correct.',
+    title: 'LLM & ML research',
+    desc: 'Training, evaluating, and understanding large language and machine-learning models.',
   },
   {
-    title: 'Kubernetes operators',
-    desc: 'KubeRay — reconciliation, readiness semantics, and reliable lifecycle management.',
+    title: 'Computer vision',
+    desc: 'Vision models and pipelines, and the data plumbing that keeps them fed.',
   },
   {
-    title: 'GPU / CUDA performance',
-    desc: 'Fast kernels for ML systems, and getting data onto the accelerator efficiently.',
+    title: 'GPU acceleration',
+    desc: 'Fast CUDA kernels and getting data onto the accelerator efficiently.',
+  },
+  {
+    title: 'AI/ML infrastructure',
+    desc: 'The distributed systems and Kubernetes operators that make the research run at scale.',
   },
 ];
 
@@ -60,13 +64,14 @@ export const ABOUT_MORE = [
 
 // Bio paragraphs (HTML allowed). Keep it short and in your own voice.
 export const ABOUT = [
-  `I'm an EE undergrad at Yuan Ze University who spends most of his time inside other
-   people's codebases. I work on <strong>distributed systems</strong>,
-   <strong>Kubernetes operators</strong>, and <strong>GPU/CUDA performance</strong> for ML
-   systems — roughly, making machine-learning infrastructure fast and hard to break.`,
-  `I'm a PMC member and committer for <strong>Apache Mahout</strong>, and a regular
-   contributor to <strong>Ray</strong> and <strong>KubeRay</strong>
-   (<strong>77+ PRs</strong>, <strong>96+ reviews</strong>). I like open source for the same
-   reason I like systems work: everything is out in the open, and you can just go read why it
-   breaks.`,
+  `I'm an EE undergrad at Yuan Ze University working at the intersection of research and
+   infrastructure. My research is in <strong>LLMs</strong>, <strong>machine learning</strong>,
+   and <strong>computer vision</strong>, with a focus on <strong>GPU acceleration</strong> — and
+   I build the <strong>AI/ML infrastructure</strong> that makes that research run, from GPU
+   kernels to cluster orchestration.`,
+  `Most of that infrastructure work happens in the open. I'm a PMC member and committer for
+   <strong>Apache Mahout</strong>, and a regular contributor to <strong>Ray</strong> and
+   <strong>KubeRay</strong> (<strong>77+ PRs</strong>, <strong>96+ reviews</strong>). I like open
+   source for the same reason I like systems work: everything is out in the open, and you can just
+   go read why it breaks.`,
 ];
