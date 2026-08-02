@@ -1,40 +1,57 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { PROFILE, ABOUT } from '../data/profile';
+import { PROFILE, TAGLINE, STATS, FOCUS } from '../data/profile';
 import { NEWS } from '../data/news';
 import { OPENSOURCE } from '../data/opensource';
-import { TALKS, EDUCATION, SKILLS } from '../data/misc';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 5);
+  .slice(0, 3);
 
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
-const L = PROFILE.links;
-const starBadge = (repo: string) =>
-  `https://img.shields.io/github/stars/${repo}?style=flat&logo=github&logoColor=888&label=%E2%98%85&labelColor=00000000&color=888888`;
+const recentNews = NEWS.slice(0, 3);
 ---
 
 <BaseLayout>
-  <header class="masthead">
+  <section class="hero">
+    <div class="eyebrow">{PROFILE.identity[1]} · {PROFILE.identity[2]}</div>
     <h1>{PROFILE.name}</h1>
-    <div class="identity">{PROFILE.identity.join(' · ')}</div>
-    <div class="contacts">
-      <a href={`mailto:${L.email}`}>Email</a>
-      <a href={L.github} target="_blank" rel="noopener">GitHub</a>
-      <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+    <p class="lead">{TAGLINE}</p>
+    <div class="btn-row">
+      <a class="btn primary" href="/opensource/">View open source</a>
+      <a class="btn ghost" href="/about/">About me</a>
+      <a class="btn ghost" href="/blog/">Blog</a>
     </div>
-  </header>
-
-  <section class="about">
-    {ABOUT.map((para) => <p set:html={para} />)}
   </section>
 
-  <h2 class="section-title">News</h2>
+  <div class="stats">
+    {
+      STATS.map((s) => (
+        <div class="stat">
+          <div class="value">{s.value}</div>
+          <div class="label">{s.label}</div>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 class="section-title">Focus</h2>
+  <div class="cards">
+    {
+      FOCUS.map((f) => (
+        <div class="card">
+          <h3>{f.title}</h3>
+          <p>{f.desc}</p>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 class="section-title">Recent news</h2>
   <ul class="news">
     {
-      NEWS.map((n) => (
+      recentNews.map((n) => (
         <li>
           <div class="when">{n.date}</div>
           <div class="what" set:html={n.html} />
@@ -43,85 +60,24 @@ const starBadge = (repo: string) =>
     }
   </ul>
 
-  <h2 class="section-title">Open Source</h2>
-  {
-    OPENSOURCE.map((proj) => (
-      <div class="project">
-        <div class="project-head">
-          <span class="name"><a href={proj.href} target="_blank" rel="noopener">{proj.name}</a></span>
-          {proj.repo && (
-            <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener" aria-label={`${proj.name} on GitHub`}>
-              <img class="badge" src={starBadge(proj.repo)} alt={`GitHub stars for ${proj.repo}`} loading="lazy" decoding="async" height="20" />
-            </a>
-          )}
+  <h2 class="section-title">Selected work</h2>
+  <div class="selected">
+    {
+      OPENSOURCE.map((proj) => (
+        <a class="row" href="/opensource/">
+          <span class="name">{proj.name}</span>
           <span class="role">{proj.role}</span>
-        </div>
-        <div class="period">{proj.period}</div>
-        <ul class="project-items">
-          {proj.items.map((item) => (
-            <li>
-              <span set:html={item.html} />
-              {item.links.length > 0 && (
-                <span class="refs">
-                  {item.links.map((lk) => (
-                    <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
-                  ))}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))
-  }
-
-  <h2 class="section-title">Talks &amp; Articles</h2>
-  <ul class="talks">
-    {
-      TALKS.map((t) => (
-        <li>
-          {t.href ? (
-            <a href={t.href} target="_blank" rel="noopener">{t.title}</a>
-          ) : (
-            <span>{t.title}</span>
-          )}
-          {t.venue && <span class="venue"> — {t.venue}</span>}
-        </li>
-      ))
-    }
-  </ul>
-
-  <h2 class="section-title">Education</h2>
-  {
-    EDUCATION.map((e) => (
-      <div class="edu">
-        <div>
-          <div class="school">{e.school}</div>
-          <div class="degree">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
-        </div>
-        <div class="period">{e.period}</div>
-      </div>
-    ))
-  }
-
-  <h2 class="section-title">Skills</h2>
-  <div class="skills">
-    {
-      SKILLS.map((s) => (
-        <div class="skills-group">
-          <span class="label">{s.group}</span>
-          <div class="tags">
-            {s.items.map((it) => <span class="tag">{it}</span>)}
-          </div>
-        </div>
+          <span class="desc" set:html={proj.items[0].html} />
+        </a>
       ))
     }
   </div>
+  <a class="more-link" href="/opensource/">All open source →</a>
 
   {
     posts.length > 0 && (
       <>
-        <h2 class="section-title">Writing</h2>
+        <h2 class="section-title">Latest writing</h2>
         <ul class="post-list">
           {posts.map((post) => (
             <li>
@@ -130,7 +86,7 @@ const starBadge = (repo: string) =>
             </li>
           ))}
         </ul>
-        <p style="margin-top:1.1rem"><a href="/blog/">All posts →</a></p>
+        <a class="more-link" href="/blog/">All posts →</a>
       </>
     )
   }

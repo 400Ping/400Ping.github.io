@@ -236,9 +236,68 @@ main { padding: 3rem 0 0; }
 .back-link { display: inline-block; margin-top: 2.5rem; color: var(--muted); font-size: 0.9rem; }
 .back-link:hover { color: var(--accent); text-decoration: none; }
 
+/* ---------- home hero ---------- */
+.hero { margin-bottom: 2.4rem; }
+.hero .eyebrow {
+  font-size: 0.8rem; font-weight: 600; color: var(--accent);
+  letter-spacing: 0.02em; margin-bottom: 0.6rem;
+}
+.hero h1 { font-size: 2.9rem; font-weight: 780; letter-spacing: -0.035em; margin: 0 0 0.7rem; line-height: 1.05; }
+.hero .lead { font-size: 1.2rem; color: var(--muted); max-width: 34rem; margin: 0 0 1.4rem; line-height: 1.5; }
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.92rem; font-weight: 600; border-radius: 10px;
+  padding: 0.5rem 1rem; border: 1px solid var(--border);
+  transition: all 0.15s ease; cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: var(--accent-fg); border-color: var(--accent); }
+.btn.primary:hover { text-decoration: none; filter: brightness(1.08); transform: translateY(-1px); }
+.btn.ghost { background: var(--surface); color: var(--fg); }
+.btn.ghost:hover { text-decoration: none; border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+/* ---------- stats strip ---------- */
+.stats {
+  display: flex; flex-wrap: wrap; gap: 1.6rem;
+  border: 1px solid var(--border); border-radius: 14px;
+  background: var(--surface); box-shadow: var(--shadow);
+  padding: 1.1rem 1.4rem; margin: 2.2rem 0;
+}
+.stat .value { font-size: 1.55rem; font-weight: 720; letter-spacing: -0.02em; }
+.stat .label { font-size: 0.82rem; color: var(--muted); }
+
+/* ---------- focus cards ---------- */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; }
+.card {
+  border: 1px solid var(--border); border-radius: 14px;
+  background: var(--surface); box-shadow: var(--shadow);
+  padding: 1.1rem 1.15rem;
+}
+.card h3 { font-size: 1rem; font-weight: 650; margin: 0 0 0.4rem; }
+.card p { font-size: 0.9rem; color: var(--muted); margin: 0; }
+
+/* ---------- condensed "selected work" rows ---------- */
+.selected { display: flex; flex-direction: column; }
+.selected a.row {
+  display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap;
+  padding: 0.85rem 0; border-bottom: 1px solid var(--border); color: var(--fg);
+}
+.selected a.row:hover { text-decoration: none; }
+.selected .row .name { font-weight: 650; }
+.selected a.row:hover .name { color: var(--accent); }
+.selected .row .role { font-size: 0.75rem; color: var(--muted); }
+.selected .row .desc { color: var(--muted); font-size: 0.92rem; flex-basis: 100%; }
+
+.more-link { display: inline-block; margin-top: 1.1rem; font-weight: 550; }
+
 /* ---------- responsive ---------- */
+@media (max-width: 40rem) {
+  .cards { grid-template-columns: 1fr; }
+}
 @media (max-width: 34rem) {
   .masthead h1 { font-size: 2.1rem; }
+  .hero h1 { font-size: 2.3rem; }
   .news li { grid-template-columns: 1fr; gap: 0.05rem; }
   .project-head .role { margin-left: 0; }
 }

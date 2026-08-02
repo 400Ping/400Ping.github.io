@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { OPENSOURCE } from '../data/opensource';
+import { TALKS } from '../data/misc';
+
+const starBadge = (repo: string) =>
+  `https://img.shields.io/github/stars/${repo}?style=flat&logo=github&logoColor=888&label=%E2%98%85&labelColor=00000000&color=888888`;
+---
+
+<BaseLayout title="Open Source" description="Open-source work: Apache Mahout, Ray, and KubeRay.">
+  <header class="masthead">
+    <h1>Open Source</h1>
+    <div class="identity">Apache Mahout · Ray · KubeRay — 77+ PRs, 96+ reviews.</div>
+  </header>
+
+  {
+    OPENSOURCE.map((proj) => (
+      <div class="project">
+        <div class="project-head">
+          <span class="name"><a href={proj.href} target="_blank" rel="noopener">{proj.name}</a></span>
+          {proj.repo && (
+            <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener" aria-label={`${proj.name} on GitHub`}>
+              <img class="badge" src={starBadge(proj.repo)} alt={`GitHub stars for ${proj.repo}`} loading="lazy" decoding="async" height="20" />
+            </a>
+          )}
+          <span class="role">{proj.role}</span>
+        </div>
+        <div class="period">{proj.period}</div>
+        <ul class="project-items">
+          {proj.items.map((item) => (
+            <li>
+              <span set:html={item.html} />
+              {item.links.length > 0 && (
+                <span class="refs">
+                  {item.links.map((lk) => (
+                    <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
+                  ))}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+
+  <h2 class="section-title">Talks &amp; Articles</h2>
+  <ul class="talks">
+    {
+      TALKS.map((t) => (
+        <li>
+          {t.href ? (
+            <a href={t.href} target="_blank" rel="noopener">{t.title}</a>
+          ) : (
+            <span>{t.title}</span>
+          )}
+          {t.venue && <span class="venue"> — {t.venue}</span>}
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>

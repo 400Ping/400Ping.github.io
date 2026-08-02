@@ -15,6 +15,43 @@ export const PROFILE = {
   },
 };
 
+// One-line tagline for the home hero.
+export const TAGLINE =
+  'I build and break machine-learning infrastructure — from GPU kernels to cluster orchestration.';
+
+// Home landing highlights.
+export const STATS = [
+  { value: '77+', label: 'Pull requests' },
+  { value: '96+', label: 'PR reviews' },
+  { value: '3', label: 'Major projects' },
+];
+
+// Focus areas shown on the home page.
+export const FOCUS = [
+  {
+    title: 'Distributed systems',
+    desc: 'Ray Core, GCS, and the machinery that keeps large clusters coordinated and correct.',
+  },
+  {
+    title: 'Kubernetes operators',
+    desc: 'KubeRay — reconciliation, readiness semantics, and reliable lifecycle management.',
+  },
+  {
+    title: 'GPU / CUDA performance',
+    desc: 'Fast kernels for ML systems, and getting data onto the accelerator efficiently.',
+  },
+];
+
+// Extra paragraphs shown only on the About page (after the shared ABOUT bio).
+export const ABOUT_MORE = [
+  `Most of my work happens in the open. I care about code that other people can read,
+   extend, and trust — which is why I spend as much time on reviews, tests, and docs as on
+   features. I also enjoy the community side of open source: mentoring new contributors and
+   helping projects grow their next generation of maintainers.`,
+  `<em>(Add a more personal paragraph here — how you got into systems, what you're
+   exploring lately, or what you do away from the keyboard.)</em>`,
+];
+
 // Bio paragraphs (HTML allowed). Keep it short and in your own voice.
 export const ABOUT = [
   `I'm an EE undergrad at Yuan Ze University who spends most of his time inside other

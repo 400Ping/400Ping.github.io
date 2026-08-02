@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PROFILE, ABOUT, ABOUT_MORE } from '../data/profile';
+import { EDUCATION, SKILLS } from '../data/misc';
+
+const L = PROFILE.links;
+---
+
+<BaseLayout title="About" description="About Jie-Kai Chang.">
+  <header class="masthead">
+    <h1>About</h1>
+    <div class="identity">{PROFILE.identity.join(' · ')} · {PROFILE.location}</div>
+  </header>
+
+  <section class="about">
+    {ABOUT.map((para) => <p set:html={para} />)}
+    {ABOUT_MORE.map((para) => <p set:html={para} />)}
+  </section>
+
+  <h2 class="section-title">Education</h2>
+  {
+    EDUCATION.map((e) => (
+      <div class="edu">
+        <div>
+          <div class="school">{e.school}</div>
+          <div class="degree">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
+        </div>
+        <div class="period">{e.period}</div>
+      </div>
+    ))
+  }
+
+  <h2 class="section-title">Skills</h2>
+  <div class="skills">
+    {
+      SKILLS.map((s) => (
+        <div class="skills-group">
+          <span class="label">{s.group}</span>
+          <div class="tags">
+            {s.items.map((it) => <span class="tag">{it}</span>)}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 class="section-title">Contact</h2>
+  <p class="muted">Reach me here — always happy to talk systems and open source.</p>
+  <div class="contacts">
+    <a href={`mailto:${L.email}`}>Email</a>
+    <a href={L.github} target="_blank" rel="noopener">GitHub</a>
+    <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</BaseLayout>

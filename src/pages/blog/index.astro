@@ -9,9 +9,11 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
 ---
 
-<BaseLayout title="Writing" description="Notes on systems, ML infra, and open source.">
-  <h1 style="font-size:2rem;font-weight:750;letter-spacing:-0.02em;margin:0 0 0.4rem">Writing</h1>
-  <p class="muted" style="margin-bottom:1.5rem">Notes on systems, ML infrastructure, and open source.</p>
+<BaseLayout title="Blog" description="Notes on systems, ML infra, and open source.">
+  <header class="masthead">
+    <h1>Blog</h1>
+    <div class="identity">Notes on systems, ML infrastructure, and open source.</div>
+  </header>
 
   {
     posts.length === 0 ? (
