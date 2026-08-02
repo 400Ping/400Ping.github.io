@@ -1,0 +1,19 @@
+---
+import { SITE, SOCIAL_LINKS } from '../consts';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="social">
+      {
+        SOCIAL_LINKS.map((link) => (
+          <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <div>© {year} {SITE.author}</div>
+  </div>
+</footer>

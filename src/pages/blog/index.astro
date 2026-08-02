@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const fmt = (d: Date) => d.toLocaleDateString('en-CA');
+---
+
+<BaseLayout title="Blog" description="文章與筆記">
+  <h1>Blog</h1>
+  <p class="muted">技術筆記、學習紀錄、隨手寫的東西。</p>
+
+  {
+    posts.length === 0 ? (
+      <p class="muted">還沒有文章。</p>
+    ) : (
+      <ul class="post-list">
+        {posts.map((post) => (
+          <li>
+            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+            <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

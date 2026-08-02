@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+import { getCollection } from 'astro:content';
+
+// 取最新 3 篇文章顯示在首頁
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-CA'); // YYYY-MM-DD
+
+// ↓↓↓ 經歷資料：改成你自己的（when = 時間，title = 單位/職稱，desc = 說明） ↓↓↓
+const experience = [
+  {
+    when: '2024 – 現在',
+    title: '某某大學 · 資訊工程學系',
+    role: '學士',
+    desc: '（在這裡寫你在做的事：研究方向、修過的重點課程、GPA 等。）',
+  },
+  {
+    when: '2025 夏',
+    title: '某某公司',
+    role: '軟體工程實習',
+    desc: '（負責的專案、用到的技術、達成的成果。）',
+  },
+];
+
+// ↓↓↓ 專案：改成你自己的（用不到就整個陣列清空） ↓↓↓
+const projects = [
+  {
+    when: '2025',
+    title: 'Project Name',
+    role: 'link →',
+    href: 'https://github.com/400ping',
+    desc: '（一句話說明這個專案在做什麼、你的角色。）',
+  },
+];
+---
+
+<BaseLayout>
+  <section class="hero">
+    <h1>{SITE.author}</h1>
+    <p class="tagline">{SITE.tagline}</p>
+    <p>
+      （這裡放三四句自我介紹：你是誰、對什麼有興趣、在做什麼。
+      這段是訪客第一眼看到的東西，寫得像跟人打招呼一樣就好。）
+    </p>
+  </section>
+
+  <h2 class="section-title">Experience</h2>
+  <div class="entries">
+    {
+      experience.map((e) => (
+        <div class="entry">
+          <div class="when">{e.when}</div>
+          <div class="what">
+            <strong>{e.title}</strong> <span class="role">· {e.role}</span>
+            <p>{e.desc}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    projects.length > 0 && (
+      <>
+        <h2 class="section-title">Projects</h2>
+        <div class="entries">
+          {projects.map((p) => (
+            <div class="entry">
+              <div class="when">{p.when}</div>
+              <div class="what">
+                <strong>{p.title}</strong>{' '}
+                {p.href && (
+                  <a class="role" href={p.href} target="_blank" rel="noopener">
+                    {p.role}
+                  </a>
+                )}
+                <p>{p.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    )
+  }
+
+  {
+    posts.length > 0 && (
+      <>
+        <h2 class="section-title">Writing</h2>
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              <time datetime={post.data.pubDate.toISOString()}>
+                {fmt(post.data.pubDate)}
+              </time>
+            </li>
+          ))}
+        </ul>
+        <p style="margin-top:1rem"><a href="/blog/">所有文章 →</a></p>
+      </>
+    )
+  }
+</BaseLayout>

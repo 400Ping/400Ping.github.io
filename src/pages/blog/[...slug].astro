@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <div class="post-meta">
+      <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+      {
+        post.data.updatedDate && (
+          <span> · 更新於 {fmt(post.data.updatedDate)}</span>
+        )
+      }
+      {
+        post.data.tags.length > 0 && (
+          <div style="margin-top:0.5rem">
+            {post.data.tags.map((t) => (
+              <span class="tag">#{t}</span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+
+    <Content />
+
+    <a class="back-link" href="/blog/">← 回到 Blog</a>
+  </article>
+</BaseLayout>
