@@ -19,6 +19,12 @@ export const PROFILE = {
 export const TAGLINE =
   'I build and break machine-learning infrastructure — from GPU kernels to cluster orchestration.';
 
+// Short friendly intro shown under the tagline on the home page.
+export const HOME_INTRO =
+  `I'm an EE undergrad and open-source systems engineer. I spend most of my time in the guts of
+   distributed ML infrastructure — Apache Mahout, Ray, and KubeRay — making it faster and harder
+   to break.`;
+
 // Home landing highlights.
 export const STATS = [
   { value: '77+', label: 'Pull requests' },

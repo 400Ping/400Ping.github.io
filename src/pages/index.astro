@@ -1,93 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { PROFILE, TAGLINE, STATS, FOCUS } from '../data/profile';
-import { NEWS } from '../data/news';
-import { OPENSOURCE } from '../data/opensource';
+import { PROFILE, TAGLINE, HOME_INTRO } from '../data/profile';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 2);
 
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
-const recentNews = NEWS.slice(0, 3);
+const L = PROFILE.links;
+// "Jie-Kai Chang" -> gradient the first name, keep the rest.
+const [firstName, ...rest] = PROFILE.name.split(' ');
 ---
 
 <BaseLayout>
-  <section class="hero">
-    <div class="eyebrow">{PROFILE.identity[1]} · {PROFILE.identity[2]}</div>
-    <h1>{PROFILE.name}</h1>
-    <p class="lead">{TAGLINE}</p>
+  <section class="home-hero">
+    <span class="eyebrow">EE undergrad · Open-source systems</span>
+    <h1>Hi, I'm <span class="grad">{firstName}</span> {rest.join(' ')}.</h1>
+    <p class="lead">{HOME_INTRO}</p>
     <div class="btn-row">
-      <a class="btn primary" href="/opensource/">View open source</a>
-      <a class="btn ghost" href="/about/">About me</a>
-      <a class="btn ghost" href="/blog/">Blog</a>
+      <a class="btn primary" href="/cv/">View my CV</a>
+      <a class="btn ghost" href="/blog/">Read the blog</a>
+      <a class="btn ghost" href={L.github} target="_blank" rel="noopener">GitHub</a>
     </div>
   </section>
-
-  <div class="stats">
-    {
-      STATS.map((s) => (
-        <div class="stat">
-          <div class="value">{s.value}</div>
-          <div class="label">{s.label}</div>
-        </div>
-      ))
-    }
-  </div>
-
-  <h2 class="section-title">Focus</h2>
-  <div class="cards">
-    {
-      FOCUS.map((f) => (
-        <div class="card">
-          <h3>{f.title}</h3>
-          <p>{f.desc}</p>
-        </div>
-      ))
-    }
-  </div>
-
-  <h2 class="section-title">Recent news</h2>
-  <ul class="news">
-    {
-      recentNews.map((n) => (
-        <li>
-          <div class="when">{n.date}</div>
-          <div class="what" set:html={n.html} />
-        </li>
-      ))
-    }
-  </ul>
-
-  <h2 class="section-title">Selected work</h2>
-  <div class="selected">
-    {
-      OPENSOURCE.map((proj) => (
-        <a class="row" href="/opensource/">
-          <span class="name">{proj.name}</span>
-          <span class="role">{proj.role}</span>
-          <span class="desc" set:html={proj.items[0].html} />
-        </a>
-      ))
-    }
-  </div>
-  <a class="more-link" href="/opensource/">All open source →</a>
 
   {
     posts.length > 0 && (
       <>
         <h2 class="section-title">Latest writing</h2>
-        <ul class="post-list">
+        <div class="blog-cards">
           {posts.map((post) => (
-            <li>
-              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-              <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
-            </li>
+            <a class="blog-card" href={`/blog/${post.id}/`}>
+              <span class="date">{fmt(post.data.pubDate)}</span>
+              <span class="title">{post.data.title}</span>
+              {post.data.description && <p class="excerpt">{post.data.description}</p>}
+            </a>
           ))}
-        </ul>
+        </div>
         <a class="more-link" href="/blog/">All posts →</a>
       </>
     )
   }
+
+  <div class="elsewhere">
+    <span>{TAGLINE}</span>
+    <div class="contacts">
+      <a href={`mailto:${L.email}`}>Email</a>
+      <a href={L.github} target="_blank" rel="noopener">GitHub</a>
+      <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
 </BaseLayout>

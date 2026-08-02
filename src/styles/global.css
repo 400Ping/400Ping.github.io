@@ -237,13 +237,65 @@ main { padding: 3rem 0 0; }
 .back-link:hover { color: var(--accent); text-decoration: none; }
 
 /* ---------- home hero ---------- */
-.hero { margin-bottom: 2.4rem; }
-.hero .eyebrow {
-  font-size: 0.8rem; font-weight: 600; color: var(--accent);
-  letter-spacing: 0.02em; margin-bottom: 0.6rem;
+.home-hero {
+  position: relative;
+  text-align: center;
+  padding: 2.4rem 0 2.8rem;
+  margin-bottom: 1.5rem;
 }
+.home-hero::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: 50%; top: -140px; transform: translateX(-50%);
+  width: min(760px, 120%); height: 460px;
+  background:
+    radial-gradient(46% 60% at 50% 40%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 72%);
+  filter: blur(8px); opacity: 0.9;
+}
+.home-hero .eyebrow {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 600; color: var(--accent);
+  letter-spacing: 0.04em; margin-bottom: 1rem;
+  border: 1px solid var(--border); background: var(--surface);
+  padding: 0.28rem 0.8rem; border-radius: 999px;
+}
+.home-hero h1 {
+  font-size: clamp(2.6rem, 8vw, 4rem); font-weight: 800;
+  letter-spacing: -0.04em; line-height: 1.02; margin: 0 0 1rem;
+}
+.home-hero h1 .grad {
+  background: linear-gradient(115deg, var(--accent), #a855f7 55%, #ec4899);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.home-hero .lead {
+  font-size: 1.15rem; color: var(--muted); line-height: 1.55;
+  max-width: 34rem; margin: 0 auto 1.8rem;
+}
+.home-hero .btn-row { justify-content: center; }
+
+/* legacy hero (unused, kept for safety) */
+.hero { margin-bottom: 2.4rem; }
+.hero .eyebrow { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-bottom: 0.6rem; }
 .hero h1 { font-size: 2.9rem; font-weight: 780; letter-spacing: -0.035em; margin: 0 0 0.7rem; line-height: 1.05; }
 .hero .lead { font-size: 1.2rem; color: var(--muted); max-width: 34rem; margin: 0 0 1.4rem; line-height: 1.5; }
+
+/* ---------- blog preview cards (home) ---------- */
+.blog-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1rem; }
+.blog-card {
+  display: flex; flex-direction: column; gap: 0.35rem;
+  border: 1px solid var(--border); border-radius: 14px;
+  background: var(--surface); box-shadow: var(--shadow);
+  padding: 1.1rem 1.2rem; color: var(--fg);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.blog-card:hover { text-decoration: none; transform: translateY(-2px); border-color: var(--accent); }
+.blog-card .date { font-family: var(--font-mono); font-size: 0.76rem; color: var(--faint); }
+.blog-card .title { font-size: 1.05rem; font-weight: 650; letter-spacing: -0.01em; }
+.blog-card:hover .title { color: var(--accent); }
+.blog-card .excerpt { font-size: 0.9rem; color: var(--muted); margin: 0; }
+
+/* ---------- home "elsewhere" strip ---------- */
+.elsewhere { text-align: center; margin-top: 2.4rem; color: var(--muted); }
+.elsewhere .contacts { justify-content: center; margin-top: 0.8rem; }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .btn {
@@ -294,6 +346,7 @@ main { padding: 3rem 0 0; }
 /* ---------- responsive ---------- */
 @media (max-width: 40rem) {
   .cards { grid-template-columns: 1fr; }
+  .blog-cards { grid-template-columns: 1fr; }
 }
 @media (max-width: 34rem) {
   .masthead h1 { font-size: 2.1rem; }

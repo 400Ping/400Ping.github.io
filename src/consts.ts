@@ -9,8 +9,7 @@ export const SITE = {
 
 export const NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/about/', label: 'About' },
-  { href: '/opensource/', label: 'Open Source' },
+  { href: '/cv/', label: 'CV' },
   { href: '/blog/', label: 'Blog' },
 ];
 

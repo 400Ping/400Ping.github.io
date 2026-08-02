@@ -1,18 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { PROFILE, ABOUT, STATS } from '../data/profile';
 import { OPENSOURCE } from '../data/opensource';
-import { TALKS } from '../data/misc';
+import { TALKS, EDUCATION, SKILLS } from '../data/misc';
 
+const L = PROFILE.links;
 const starBadge = (repo: string) =>
   `https://img.shields.io/github/stars/${repo}?style=flat&logo=github&logoColor=888&label=%E2%98%85&labelColor=00000000&color=888888`;
 ---
 
-<BaseLayout title="Open Source" description="Open-source work: Apache Mahout, Ray, and KubeRay.">
+<BaseLayout title="CV" description="Jie-Kai Chang — CV: open-source experience, education, and skills.">
   <header class="masthead">
-    <h1>Open Source</h1>
-    <div class="identity">Apache Mahout · Ray · KubeRay — 77+ PRs, 96+ reviews.</div>
+    <h1>{PROFILE.name}</h1>
+    <div class="identity">{PROFILE.identity.join(' · ')} · {PROFILE.location}</div>
+    <div class="contacts">
+      <a href={`mailto:${L.email}`}>Email</a>
+      <a href={L.github} target="_blank" rel="noopener">GitHub</a>
+      <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </header>
 
+  <section class="about">
+    {ABOUT.map((para) => <p set:html={para} />)}
+  </section>
+
+  <div class="stats">
+    {
+      STATS.map((s) => (
+        <div class="stat">
+          <div class="value">{s.value}</div>
+          <div class="label">{s.label}</div>
+        </div>
+      ))
+    }
+  </div>
+
+  <h2 class="section-title">Experience</h2>
   {
     OPENSOURCE.map((proj) => (
       <div class="project">
@@ -59,4 +82,31 @@ const starBadge = (repo: string) =>
       ))
     }
   </ul>
+
+  <h2 class="section-title">Education</h2>
+  {
+    EDUCATION.map((e) => (
+      <div class="edu">
+        <div>
+          <div class="school">{e.school}</div>
+          <div class="degree">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
+        </div>
+        <div class="period">{e.period}</div>
+      </div>
+    ))
+  }
+
+  <h2 class="section-title">Skills</h2>
+  <div class="skills">
+    {
+      SKILLS.map((s) => (
+        <div class="skills-group">
+          <span class="label">{s.group}</span>
+          <div class="tags">
+            {s.items.map((it) => <span class="tag">{it}</span>)}
+          </div>
+        </div>
+      ))
+    }
+  </div>
 </BaseLayout>
