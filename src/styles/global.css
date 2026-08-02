@@ -271,6 +271,7 @@ main { padding: 3rem 0 0; }
   max-width: 34rem; margin: 0 auto 1.8rem;
 }
 .home-hero .btn-row { justify-content: center; }
+.hero-areas { justify-content: center; margin-top: 1.8rem; }
 
 /* legacy hero (unused, kept for safety) */
 .hero { margin-bottom: 2.4rem; }

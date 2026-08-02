@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { PROFILE, ABOUT, STATS } from '../data/profile';
+import { PROFILE, ABOUT, STATS, AREAS } from '../data/profile';
 import { OPENSOURCE } from '../data/opensource';
 import { TALKS, EDUCATION, SKILLS } from '../data/misc';
 
@@ -33,6 +33,11 @@ const starBadge = (repo: string) =>
         </div>
       ))
     }
+  </div>
+
+  <h2 class="section-title">Research areas</h2>
+  <div class="tags">
+    {AREAS.map((a) => <span class="tag">{a}</span>)}
   </div>
 
   <h2 class="section-title">Experience</h2>

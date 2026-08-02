@@ -17,39 +17,31 @@ export const PROFILE = {
 
 // One-line tagline for the home hero.
 export const TAGLINE =
-  'I research LLMs, machine learning, and computer vision — accelerated on GPUs — and build the AI/ML infrastructure behind it.';
+  'Research across distributed systems, parallel computing, distributed ML, inference, RL, and multimodal — plus the infrastructure behind it.';
 
 // Short friendly intro shown under the tagline on the home page.
 export const HOME_INTRO =
-  `I'm an EE undergrad researching LLMs, machine learning, and computer vision, with a focus on
-   GPU acceleration — and I build the AI/ML infrastructure that makes that research run. Much of
-   that infrastructure work is open source, across Apache Mahout, Ray, and KubeRay.`;
+  `I'm an EE undergrad whose research spans distributed systems, parallel computing, and
+   Kubernetes, alongside distributed ML, inference, RL, and multimodal models — and I build the
+   AI/ML infrastructure that ties it together. Much of that work is open source, across Apache
+   Mahout, Ray, and KubeRay.`;
+
+// Research areas (rendered as tags on the home page and CV).
+export const AREAS = [
+  'Distributed systems',
+  'Parallel computing',
+  'Kubernetes',
+  'Distributed ML',
+  'Inference',
+  'Reinforcement learning',
+  'Multimodal',
+];
 
 // Home landing highlights.
 export const STATS = [
   { value: '77+', label: 'Pull requests' },
   { value: '96+', label: 'PR reviews' },
   { value: '3', label: 'Major projects' },
-];
-
-// Focus areas.
-export const FOCUS = [
-  {
-    title: 'LLM & ML research',
-    desc: 'Training, evaluating, and understanding large language and machine-learning models.',
-  },
-  {
-    title: 'Computer vision',
-    desc: 'Vision models and pipelines, and the data plumbing that keeps them fed.',
-  },
-  {
-    title: 'GPU acceleration',
-    desc: 'Fast CUDA kernels and getting data onto the accelerator efficiently.',
-  },
-  {
-    title: 'AI/ML infrastructure',
-    desc: 'The distributed systems and Kubernetes operators that make the research run at scale.',
-  },
 ];
 
 // Extra paragraphs shown only on the About page (after the shared ABOUT bio).
@@ -65,10 +57,11 @@ export const ABOUT_MORE = [
 // Bio paragraphs (HTML allowed). Keep it short and in your own voice.
 export const ABOUT = [
   `I'm an EE undergrad at Yuan Ze University working at the intersection of research and
-   infrastructure. My research is in <strong>LLMs</strong>, <strong>machine learning</strong>,
-   and <strong>computer vision</strong>, with a focus on <strong>GPU acceleration</strong> — and
-   I build the <strong>AI/ML infrastructure</strong> that makes that research run, from GPU
-   kernels to cluster orchestration.`,
+   infrastructure. My research spans <strong>distributed systems</strong>,
+   <strong>parallel computing</strong>, and <strong>Kubernetes</strong>, together with
+   <strong>distributed ML</strong>, <strong>inference</strong>, <strong>RL</strong>, and
+   <strong>multimodal</strong> models — and I build the <strong>AI/ML infrastructure</strong>
+   that makes that research run at scale.`,
   `Most of that infrastructure work happens in the open. I'm a PMC member and committer for
    <strong>Apache Mahout</strong>, and a regular contributor to <strong>Ray</strong> and
    <strong>KubeRay</strong> (<strong>77+ PRs</strong>, <strong>96+ reviews</strong>). I like open
