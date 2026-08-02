@@ -1,6 +1,22 @@
-// Talks & Articles, Education, Skills.
+// Publications, Talks & Articles, Education, Skills.
 
-// Add the real URL to `href` when you have it (empty = title only).
+// Publications. Fill in the real details; each `links` entry with an empty
+// href is skipped, so you can leave placeholders until you have the URL.
+export const PUBLICATIONS = [
+  {
+    title: 'QDP: A Quantum Data Plane for GPU-Accelerated Encoding', // TODO: exact paper title
+    authors: 'Jie-Kai Chang, et al.', // TODO: full author list
+    venue: 'Demo paper', // TODO: venue + year, e.g. "ApacheCon 2026"
+    year: '2026',
+    links: [
+      { label: 'PDF', href: '' },
+      { label: 'arXiv', href: '' },
+      { label: 'Code', href: '' },
+    ],
+  },
+];
+
+// Talks & Articles. Add the real URL to `href` when you have it (empty = title only).
 export const TALKS = [
   { title: 'Introducing KubeRay v1.5', venue: '', href: '' },
   {

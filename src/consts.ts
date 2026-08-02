@@ -2,7 +2,7 @@
 export const SITE = {
   title: "Jie-Kai Chang's Website",
   author: 'Jie-Kai Chang',
-  tagline: 'Research across distributed systems, parallel computing, distributed ML, inference, RL, and multimodal — plus the infrastructure behind it.',
+  tagline: 'Research across distributed systems, parallel computing, inference, reinforcement learning, multimodal and the infrastructure behind it.',
   description:
     'Jie-Kai Chang (400Ping) — research across distributed systems, parallel computing, Kubernetes, distributed ML, inference, RL, and multimodal, plus the AI/ML infrastructure behind it. Apache Mahout PMC & Committer; Ray / KubeRay contributor.',
 };

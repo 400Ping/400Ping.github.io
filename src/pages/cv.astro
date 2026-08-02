@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PROFILE, ABOUT, STATS, AREAS } from '../data/profile';
 import { OPENSOURCE } from '../data/opensource';
-import { TALKS, EDUCATION, SKILLS } from '../data/misc';
+import { PUBLICATIONS, TALKS, EDUCATION, SKILLS } from '../data/misc';
 
 const L = PROFILE.links;
 const starBadge = (repo: string) =>
@@ -70,6 +70,35 @@ const starBadge = (repo: string) =>
         </ul>
       </div>
     ))
+  }
+
+  {
+    PUBLICATIONS.length > 0 && (
+      <>
+        <h2 class="section-title">Publications</h2>
+        <ol class="pubs">
+          {PUBLICATIONS.map((p) => {
+            const links = p.links.filter((l) => l.href);
+            return (
+              <li class="pub">
+                <div class="title">{p.title}</div>
+                {p.authors && (
+                  <div class="authors" set:html={p.authors.replace(/Jie-Kai Chang/g, '<span class="me">Jie-Kai Chang</span>')} />
+                )}
+                <div class="venue">{[p.venue, p.year].filter(Boolean).join(', ')}</div>
+                {links.length > 0 && (
+                  <div class="refs">
+                    {links.map((l) => (
+                      <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
+                    ))}
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </>
+    )
   }
 
   <h2 class="section-title">Talks &amp; Articles</h2>

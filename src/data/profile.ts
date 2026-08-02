@@ -3,11 +3,11 @@ export const PROFILE = {
   name: 'Jie-Kai Chang',
   // One-line identity under the name (parts are joined with · )
   identity: [
-    'EE undergrad, Yuan Ze University',
-    'Apache Mahout PMC & Committer',
-    'Ray / KubeRay contributor',
+    'B.S. in Electrical Engineering, Yuan Ze University',
+    'Apache Mahout PMC Member & Committer',
+    'Ray/KubeRay contributor',
   ],
-  location: 'Taiwan',
+  location: 'Taipei, Taiwan',
   links: {
     email: 'jiekaichang@apache.org',
     github: 'https://github.com/400Ping',
@@ -17,11 +17,11 @@ export const PROFILE = {
 
 // One-line tagline for the home hero.
 export const TAGLINE =
-  'Researching AI/ML systems and the infrastructure that runs them.';
+  'Researching LLM/ML and the infrastructure that runs them.';
 
 // Short intro shown under the name on the home page.
 export const HOME_INTRO =
-  `EE undergrad researching AI/ML systems — and building the open-source infrastructure that runs them.`;
+  `Researching LLM/ML and building the infrastructure that runs them.`;
 
 // Short area labels for the home page.
 export const HOME_AREAS = [
@@ -39,7 +39,6 @@ export const AREAS = [
   'Multimodal',
   'Reinforcement learning',
   'Inference',
-  'Distributed ML',
   'ML systems',
   'Distributed systems',
   'Parallel computing',
@@ -66,7 +65,7 @@ export const ABOUT_MORE = [
 
 // Bio paragraphs (HTML allowed). Keep it short and in your own voice.
 export const ABOUT = [
-  `I'm an EE undergrad at Yuan Ze University working at the intersection of research and
+  `I'm an undergrad at Yuan Ze University working at the intersection of research and
    infrastructure. My research spans <strong>machine learning</strong> — LLMs, computer vision,
    multimodal models, RL, and inference — and the <strong>systems</strong> that run it:
    distributed systems, parallel computing, GPU acceleration, and Kubernetes. I build the
@@ -74,7 +73,5 @@ export const ABOUT = [
    orchestration.`,
   `Most of that infrastructure work happens in the open. I'm a PMC member and committer for
    <strong>Apache Mahout</strong>, and a regular contributor to <strong>Ray</strong> and
-   <strong>KubeRay</strong> (<strong>77+ PRs</strong>, <strong>96+ reviews</strong>). I like open
-   source for the same reason I like systems work: everything is out in the open, and you can just
-   go read why it breaks.`,
+   <strong>KubeRay</strong> (<strong>77+ PRs</strong>, <strong>96+ reviews</strong>).`,
 ];

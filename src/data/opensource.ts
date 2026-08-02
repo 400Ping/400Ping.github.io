@@ -4,12 +4,12 @@ export const OPENSOURCE = [
   {
     name: 'Apache Mahout',
     repo: 'apache/mahout',
-    role: 'PMC & Committer',
-    period: 'Apr 2026 – Present · committer since Jan 2026',
+    role: 'PMC Member & Committer',
+    period: 'Nov 2025 – Present · committer since Jan. 2026',
     href: 'https://mahout.apache.org/',
     items: [
       {
-        html: `<strong>Co-created QDP (Quantum Data Plane)</strong> — encode classical data into quantum states with GPU-accelerated kernels.`,
+        html: `<strong>Co-Authored QDP (Quantum Data Plane)</strong> — encode classical data into quantum states with GPU-accelerated kernels.`,
         links: [{ label: 'qumat-qdp', href: 'https://github.com/apache/mahout' }],
       },
       {
