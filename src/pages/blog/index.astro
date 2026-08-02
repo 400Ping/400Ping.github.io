@@ -9,13 +9,13 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
 ---
 
-<BaseLayout title="Blog" description="文章與筆記">
-  <h1>Blog</h1>
-  <p class="muted">技術筆記、學習紀錄、隨手寫的東西。</p>
+<BaseLayout title="Writing" description="Notes on systems, ML infra, and open source.">
+  <h1>Writing</h1>
+  <p class="muted">Notes on systems, ML infrastructure, and open source.</p>
 
   {
     posts.length === 0 ? (
-      <p class="muted">還沒有文章。</p>
+      <p class="muted">No posts yet.</p>
     ) : (
       <ul class="post-list">
         {posts.map((post) => (

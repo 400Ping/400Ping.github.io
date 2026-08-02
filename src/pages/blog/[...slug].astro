@@ -14,19 +14,15 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 const fmt = (d: Date) =>
-  d.toLocaleDateString('zh-TW', { year: 'numeric', month: 'long', day: 'numeric' });
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article>
+  <article class="article">
     <h1>{post.data.title}</h1>
     <div class="post-meta">
       <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
-      {
-        post.data.updatedDate && (
-          <span> · 更新於 {fmt(post.data.updatedDate)}</span>
-        )
-      }
+      {post.data.updatedDate && <span> · updated {fmt(post.data.updatedDate)}</span>}
       {
         post.data.tags.length > 0 && (
           <div style="margin-top:0.5rem">
@@ -40,6 +36,6 @@ const fmt = (d: Date) =>
 
     <Content />
 
-    <a class="back-link" href="/blog/">← 回到 Blog</a>
+    <a class="back-link" href="/blog/">← Back to writing</a>
   </article>
 </BaseLayout>

@@ -1,33 +1,33 @@
 ---
-title: Hello World — 這個網站是怎麼做的
-description: 用 Astro 從零搭一個可以放在 GitHub Pages 的個人網站。
+title: How this site is built
+description: A static personal site with Astro, deployed to GitHub Pages.
 pubDate: 2026-08-02
 tags: [astro, web, meta]
 ---
 
-這是第一篇文章，順便記錄一下這個網站怎麼來的。
+A quick note on how this site works, mostly so future-me remembers.
 
-## 技術選型
+## Stack
 
-- **框架**：[Astro](https://astro.build/)，輸出純靜態檔案，適合放在 GitHub Pages。
-- **寫文章**：直接用 Markdown 檔放在 `src/content/blog/`，加上開頭的 frontmatter 就會自動變成一篇文章。
-- **部署**：GitHub Actions，每次 push 到 `main` 就自動 build 並發佈。
+- **Framework**: [Astro](https://astro.build/) — outputs plain static files, which is all GitHub Pages needs.
+- **Posts**: plain Markdown files under `src/content/blog/`. Add a file, it becomes a post.
+- **Deploy**: GitHub Actions. Every push to `main` builds and publishes.
 
-## 怎麼新增一篇文章
+## Adding a post
 
-在 `src/content/blog/` 底下新增一個 `.md` 檔，最上面放 frontmatter：
+Drop a `.md` file into `src/content/blog/` with frontmatter at the top:
 
 ```markdown
 ---
-title: 文章標題
-description: 一句話描述（選填）
+title: Post title
+description: One-line summary (optional)
 pubDate: 2026-08-10
-tags: [tag1, tag2]
+tags: [systems, notes]
 ---
 
-正文從這裡開始，用 Markdown 寫就好。
+Body starts here, in Markdown.
 ```
 
-存檔、push，網站就會多一篇文章。就這麼簡單。
+Commit, push, done. Set `draft: true` in the frontmatter to keep a post unpublished while it's a work in progress.
 
-> 小提醒：把 frontmatter 裡的 `draft: true` 加上去，這篇就會暫時不發佈，方便寫到一半先存著。
+> Everything is out in the open — which is the whole point.

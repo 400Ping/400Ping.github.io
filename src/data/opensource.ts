@@ -1,35 +1,36 @@
-// 開源貢獻 —— 首頁的核心區塊。
-// 每個 project 有標題、角色、期間、連結，以及一組貢獻條目。
-// 條目可帶 links: [{ label, href }]，會顯示成小標籤。
+// Open source — the centerpiece.
+// `repo` (owner/name) renders a live GitHub star badge next to the project title.
 export const OPENSOURCE = [
   {
     name: 'Apache Mahout',
+    repo: 'apache/mahout',
     role: 'PMC & Committer',
-    period: 'Apr 2026 – Present · Committer since Jan 2026',
+    period: 'Apr 2026 – Present · committer since Jan 2026',
     href: 'https://mahout.apache.org/',
     items: [
       {
-        html: `<strong>Co-created QDP (Quantum Data Plane)</strong> — 用 GPU-accelerated kernels 把 classical data 編碼成 quantum states。`,
+        html: `<strong>Co-created QDP (Quantum Data Plane)</strong> — encode classical data into quantum states with GPU-accelerated kernels.`,
         links: [{ label: 'qumat-qdp', href: 'https://github.com/apache/mahout' }],
       },
       {
-        html: `<strong>Community leadership</strong> — 主持社群討論與 meetings、mentor 新貢獻者，並撰寫 demo paper。`,
+        html: `<strong>Community leadership</strong> — lead discussions and meetings, mentor contributors, and authored a demo paper.`,
         links: [],
       },
       {
-        html: `<strong>AMD ecosystem</strong> — 促成 AMD Taiwan、ITRI 與 Apache Mahout 的合作，主導 Mahout 的 AMD 生態系支援。`,
+        html: `<strong>AMD ecosystem</strong> — initiated a collaboration between AMD Taiwan, ITRI, and Apache Mahout; leading AMD ecosystem support in Mahout.`,
         links: [],
       },
     ],
   },
   {
     name: 'Ray',
+    repo: 'ray-project/ray',
     role: 'Contributor',
     period: 'Feb 2025 – Present',
     href: 'https://github.com/ray-project/ray',
     items: [
       {
-        html: `<strong>Ray Data — Compute Expressions</strong>（進行中）：擴充 <code>.dt</code>/<code>.arr</code>/<code>.map</code>/<code>.image</code>/<code>.uri</code> namespaces；交付 datetime 與 fixed-size array 支援。`,
+        html: `<strong>Ray Data — Compute Expressions</strong> (ongoing): expanding the <code>.dt</code>/<code>.arr</code>/<code>.map</code>/<code>.image</code>/<code>.uri</code> namespaces; shipped datetime and fixed-size array support.`,
         links: [
           { label: 'Issue #58674', href: 'https://github.com/ray-project/ray/issues/58674' },
           { label: 'PR #58740', href: 'https://github.com/ray-project/ray/pull/58740' },
@@ -37,43 +38,44 @@ export const OPENSOURCE = [
         ],
       },
       {
-        html: `<strong>DatabricksUCDatasource schema bug</strong>：修掉 <code>schema()</code> shadowing 造成的 runtime error，並補上 regression tests。`,
+        html: `Fixed a <strong>DatabricksUCDatasource schema bug</strong> — resolved <code>schema()</code> shadowing that triggered runtime errors; added regression tests.`,
         links: [{ label: 'PR #61282', href: 'https://github.com/ray-project/ray/pull/61282' }],
       },
       {
-        html: `<strong>Ray Data reliability</strong>：修復 <code>ActorPoolMapOperator</code> 的 flaky queue cleanup。`,
+        html: `Improved <strong>Ray Data reliability</strong> — fixed a flaky queue cleanup in <code>ActorPoolMapOperator</code>.`,
         links: [{ label: 'PR #58694', href: 'https://github.com/ray-project/ray/pull/58694' }],
       },
       {
-        html: `<strong>Ray Core — Unified RayService readiness endpoint</strong>（進行中）：設計統一 Raylet + Serve readiness 語意的 worker health endpoint（for KubeRay）。`,
+        html: `<strong>Ray Core — Unified RayService readiness endpoint</strong> (ongoing): a Ray-defined worker health endpoint unifying Raylet + Serve readiness semantics for KubeRay.`,
         links: [{ label: 'Issue #60925', href: 'https://github.com/ray-project/ray/issues/60925' }],
       },
       {
-        html: `<strong>GCS StoreClient async cleanup</strong>：<code>Status</code> → <code>void</code>。`,
+        html: `<strong>GCS StoreClient async cleanup</strong> — <code>Status</code> → <code>void</code>.`,
         links: [{ label: 'PR #55663', href: 'https://github.com/ray-project/ray/pull/55663' }],
       },
       {
-        html: `<strong>Split pubsub targets</strong>：拆分 Bazel targets 以改善 build 效能。`,
+        html: `<strong>Split pubsub targets</strong> — smaller Bazel targets to improve build performance.`,
         links: [{ label: 'PR #50601', href: 'https://github.com/ray-project/ray/pull/50601' }],
       },
     ],
   },
   {
     name: 'KubeRay',
+    repo: 'ray-project/kuberay',
     role: 'Contributor',
     period: 'Feb 2025 – Present',
     href: 'https://github.com/ray-project/kuberay',
     items: [
       {
-        html: `<strong>進行中</strong>：Idle termination、移除 wget dependency、History Server metadata 收集邏輯、History Server S3 client migration。`,
+        html: `<strong>Ongoing</strong>: idle termination, removing the wget dependency, History Server metadata collection, and History Server S3 client migration.`,
         links: [],
       },
       {
-        html: `<strong>RayJob Sidecar mode fix</strong>：避免 head pod 被刪除時 head pod 重啟。`,
+        html: `<strong>RayJob sidecar mode fix</strong> — prevent the head pod from restarting when it is deleted.`,
         links: [{ label: 'PR #4234', href: 'https://github.com/ray-project/kuberay/pull/4234' }],
       },
       {
-        html: `<strong>RayService e2e</strong>：新增 <code>TestUpdateRayService</code> e2e 測試。`,
+        html: `<strong>RayService e2e</strong> — added an end-to-end test for <code>UpdateRayService</code>.`,
         links: [{ label: 'PR #3446', href: 'https://github.com/ray-project/kuberay/pull/3446' }],
       },
     ],

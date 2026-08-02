@@ -1,20 +1,22 @@
-// News / 近況 —— 學術主頁常見的動態列表。新的放最上面。
+// News / updates — newest first.
 export const NEWS = [
   {
     date: '2026-04',
-    html: `獲選為 <strong>Apache Mahout PMC member</strong>，開始參與專案治理與社群方向。`,
+    html: `Elected <strong>PMC member</strong> of Apache Mahout.`,
   },
   {
     date: '2026-01',
-    html: `成為 <strong>Apache Mahout Committer</strong>；與團隊 co-create <em>QDP (Quantum Data Plane)</em>，
-           用 GPU-accelerated kernels 把 classical data 編碼成 quantum states。`,
+    html: `Became an <strong>Apache Mahout committer</strong>; co-created
+           <em>QDP (Quantum Data Plane)</em>, encoding classical data into quantum states with
+           GPU-accelerated kernels.`,
   },
   {
     date: '2026',
-    html: `發表技術分享 <a href="/blog/">《Introducing KubeRay v1.5》</a>，介紹 KubeRay 最新進展。`,
+    html: `Gave a talk, <a href="/blog/">Introducing KubeRay v1.5</a>.`,
   },
   {
     date: '2025-02',
-    html: `開始貢獻 <strong>Ray</strong> 與 <strong>KubeRay</strong>，聚焦 Ray Data、Ray Core 與 operator 可靠性。`,
+    html: `Started contributing to <strong>Ray</strong> and <strong>KubeRay</strong> —
+           Ray Data, Ray Core, and operator reliability.`,
   },
 ];

@@ -8,147 +8,147 @@ import { TALKS, EDUCATION, SKILLS } from '../data/misc';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .slice(0, 4);
 
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
 const L = PROFILE.links;
+// GitHub star badge via shields.io (flat, star icon + count).
+const starBadge = (repo: string) =>
+  `https://img.shields.io/github/stars/${repo}?style=flat&logo=github&logoColor=888&label=%E2%98%85&labelColor=00000000&color=888888`;
 ---
 
-<BaseLayout wide>
-  <div class="profile-grid">
-    <!-- 左：名片欄 -->
-    <aside class="card-rail">
-      <div class="avatar">
-        {
-          PROFILE.avatarImage ? (
-            <img src={PROFILE.avatarImage} alt={PROFILE.name} />
-          ) : (
-            <span>{PROFILE.initials}</span>
-          )
-        }
-      </div>
-      <div class="rail-name">{PROFILE.name}</div>
-      <div class="rail-titles">
-        {PROFILE.titles.map((t) => <div>{t}</div>)}
-      </div>
-      <div class="rail-loc">📍 {PROFILE.location}</div>
-      <nav class="rail-links">
-        <a href={`mailto:${L.email}`}><span class="ic">✉</span> Email</a>
-        <a href={L.github} target="_blank" rel="noopener"><span class="ic">⌗</span> GitHub</a>
-        <a href={L.linkedin} target="_blank" rel="noopener"><span class="ic">in</span> LinkedIn</a>
-        <a href={L.cv} target="_blank" rel="noopener"><span class="ic">▤</span> CV (PDF)</a>
-      </nav>
-    </aside>
-
-    <!-- 右：內容 -->
-    <div class="profile-main">
-      <h1>{PROFILE.name}</h1>
-
-      <section class="about">
-        {ABOUT.map((para) => <p set:html={para} />)}
-      </section>
-
-      <h2 class="section-title">News</h2>
-      <ul class="news">
-        {
-          NEWS.map((n) => (
-            <li>
-              <div class="when">{n.date}</div>
-              <div class="what" set:html={n.html} />
-            </li>
-          ))
-        }
-      </ul>
-
-      <h2 class="section-title">Selected Open Source</h2>
+<BaseLayout>
+  <header class="masthead">
+    <h1>{PROFILE.name}</h1>
+    <div class="identity">
       {
-        OPENSOURCE.map((proj) => (
-          <div class="os-project">
-            <div class="os-head">
-              <h3>
-                <a href={proj.href} target="_blank" rel="noopener">{proj.name}</a>
-              </h3>
-              <span class="os-role">{proj.role}</span>
-            </div>
-            <div class="os-period">{proj.period}</div>
-            <ul class="os-items">
-              {proj.items.map((item) => (
-                <li>
-                  <span set:html={item.html} />
-                  {item.links.length > 0 && (
-                    <span class="pr-links">
-                      {item.links.map((lk) => (
-                        <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
-                      ))}
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-
-      <h2 class="section-title">Talks &amp; Articles</h2>
-      <ul class="talks">
-        {
-          TALKS.map((t) => (
-            <li>
-              {t.href ? (
-                <a href={t.href} target="_blank" rel="noopener">{t.title}</a>
-              ) : (
-                <span>{t.title}</span>
-              )}
-              {t.venue && <span class="venue"> — {t.venue}</span>}
-            </li>
-          ))
-        }
-      </ul>
-
-      <h2 class="section-title">Education</h2>
-      {
-        EDUCATION.map((e) => (
-          <div class="edu">
-            <div class="row">
-              <span class="school">{e.school}</span>
-              <span class="period">{e.period}</span>
-            </div>
-            <div class="degree">
-              {e.degree}
-              {e.note && <span class="faint"> · {e.note}</span>}
-            </div>
-          </div>
-        ))
-      }
-
-      <h2 class="section-title">Skills</h2>
-      {
-        SKILLS.map((s) => (
-          <div class="skills-group">
-            <span class="label">{s.group}</span>
-            <div class="chips">
-              {s.items.map((it) => <span class="chip">{it}</span>)}
-            </div>
-          </div>
-        ))
-      }
-
-      {
-        posts.length > 0 && (
+        PROFILE.identity.map((part, i) => (
           <>
-            <h2 class="section-title">Writing</h2>
-            <ul class="post-list">
-              {posts.map((post) => (
-                <li>
-                  <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-                  <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
-                </li>
-              ))}
-            </ul>
-            <p style="margin-top:1rem"><a href="/blog/">所有文章 →</a></p>
+            {i > 0 && <span class="sep">·</span>}
+            {part}
           </>
-        )
+        ))
       }
     </div>
-  </div>
+    <div class="contacts">
+      <a href={`mailto:${L.email}`}>Email</a>
+      <span class="sep">·</span>
+      <a href={L.github} target="_blank" rel="noopener">GitHub</a>
+      <span class="sep">·</span>
+      <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <span class="sep">·</span>
+      <span class="faint">{PROFILE.location}</span>
+    </div>
+  </header>
+
+  <section class="about">
+    {ABOUT.map((para) => <p set:html={para} />)}
+  </section>
+
+  <h2 class="section-title">News</h2>
+  <ul class="news">
+    {
+      NEWS.map((n) => (
+        <li>
+          <div class="when">{n.date}</div>
+          <div class="what" set:html={n.html} />
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 class="section-title">Open Source</h2>
+  {
+    OPENSOURCE.map((proj) => (
+      <div class="os-project">
+        <div class="os-head">
+          <h3>
+            <a href={proj.href} target="_blank" rel="noopener">{proj.name}</a>
+          </h3>
+          {proj.repo && (
+            <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener" aria-label={`${proj.name} on GitHub`}>
+              <img class="os-star" src={starBadge(proj.repo)} alt={`GitHub stars for ${proj.repo}`} loading="lazy" decoding="async" height="18" />
+            </a>
+          )}
+          <span class="os-role">{proj.role}</span>
+        </div>
+        <div class="os-period">{proj.period}</div>
+        <ul class="os-items">
+          {proj.items.map((item) => (
+            <li>
+              <span set:html={item.html} />
+              {item.links.length > 0 && (
+                <span class="pr-links">
+                  {item.links.map((lk) => (
+                    <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
+                  ))}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+
+  <h2 class="section-title">Talks &amp; Articles</h2>
+  <ul class="talks">
+    {
+      TALKS.map((t) => (
+        <li>
+          {t.href ? (
+            <a href={t.href} target="_blank" rel="noopener">{t.title}</a>
+          ) : (
+            <span>{t.title}</span>
+          )}
+          {t.venue && <span class="venue"> — {t.venue}</span>}
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2 class="section-title">Education</h2>
+  {
+    EDUCATION.map((e) => (
+      <div class="edu">
+        <div class="row">
+          <span class="school">{e.school}</span>
+          <span class="period">{e.period}</span>
+        </div>
+        <div class="degree">
+          {e.degree}
+          {e.note && <span class="faint"> · {e.note}</span>}
+        </div>
+      </div>
+    ))
+  }
+
+  <h2 class="section-title">Skills</h2>
+  {
+    SKILLS.map((s) => (
+      <div class="skills-group">
+        <span class="label">{s.group}</span>
+        <div class="chips">
+          {s.items.map((it) => <span class="chip">{it}</span>)}
+        </div>
+      </div>
+    ))
+  }
+
+  {
+    posts.length > 0 && (
+      <>
+        <h2 class="section-title">Writing</h2>
+        <ul class="post-list">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
+            </li>
+          ))}
+        </ul>
+        <p style="margin-top:0.9rem"><a href="/blog/">All posts →</a></p>
+      </>
+    )
+  }
 </BaseLayout>
