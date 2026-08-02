@@ -17,24 +17,34 @@ export const PROFILE = {
 
 // One-line tagline for the home hero.
 export const TAGLINE =
-  'Research across distributed systems, parallel computing, distributed ML, inference, RL, and multimodal — plus the infrastructure behind it.';
+  'Researching AI/ML systems and the infrastructure that runs them.';
 
-// Short friendly intro shown under the tagline on the home page.
+// Short intro shown under the name on the home page.
 export const HOME_INTRO =
-  `I'm an EE undergrad whose research spans distributed systems, parallel computing, and
-   Kubernetes, alongside distributed ML, inference, RL, and multimodal models — and I build the
-   AI/ML infrastructure that ties it together. Much of that work is open source, across Apache
-   Mahout, Ray, and KubeRay.`;
+  `EE undergrad researching AI/ML systems — and building the open-source infrastructure that runs them.`;
 
-// Research areas (rendered as tags on the home page and CV).
+// Short area labels for the home page.
+export const HOME_AREAS = [
+  'LLM/ML',
+  'Computer Vision',
+  'GPU acceleration',
+  'ML systems',
+  'Distributed systems',
+];
+
+// Full research areas — shown on the CV page.
 export const AREAS = [
+  'LLM / ML',
+  'Computer vision',
+  'Multimodal',
+  'Reinforcement learning',
+  'Inference',
+  'Distributed ML',
+  'ML systems',
   'Distributed systems',
   'Parallel computing',
+  'GPU acceleration',
   'Kubernetes',
-  'Distributed ML',
-  'Inference',
-  'Reinforcement learning',
-  'Multimodal',
 ];
 
 // Home landing highlights.
@@ -57,11 +67,11 @@ export const ABOUT_MORE = [
 // Bio paragraphs (HTML allowed). Keep it short and in your own voice.
 export const ABOUT = [
   `I'm an EE undergrad at Yuan Ze University working at the intersection of research and
-   infrastructure. My research spans <strong>distributed systems</strong>,
-   <strong>parallel computing</strong>, and <strong>Kubernetes</strong>, together with
-   <strong>distributed ML</strong>, <strong>inference</strong>, <strong>RL</strong>, and
-   <strong>multimodal</strong> models — and I build the <strong>AI/ML infrastructure</strong>
-   that makes that research run at scale.`,
+   infrastructure. My research spans <strong>machine learning</strong> — LLMs, computer vision,
+   multimodal models, RL, and inference — and the <strong>systems</strong> that run it:
+   distributed systems, parallel computing, GPU acceleration, and Kubernetes. I build the
+   <strong>AI/ML infrastructure</strong> that ties the two together, from GPU kernels to cluster
+   orchestration.`,
   `Most of that infrastructure work happens in the open. I'm a PMC member and committer for
    <strong>Apache Mahout</strong>, and a regular contributor to <strong>Ray</strong> and
    <strong>KubeRay</strong> (<strong>77+ PRs</strong>, <strong>96+ reviews</strong>). I like open

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { PROFILE, TAGLINE, HOME_INTRO, AREAS } from '../data/profile';
+import { PROFILE, TAGLINE, HOME_INTRO, HOME_AREAS } from '../data/profile';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -15,7 +15,7 @@ const [firstName, ...rest] = PROFILE.name.split(' ');
 
 <BaseLayout>
   <section class="home-hero">
-    <span class="eyebrow">Distributed systems · Distributed ML · RL · Multimodal</span>
+    <span class="eyebrow">LLM/ML · Computer Vision · ML systems</span>
     <h1>Hi, I'm <span class="grad">{firstName}</span> {rest.join(' ')}.</h1>
     <p class="lead">{HOME_INTRO}</p>
     <div class="btn-row">
@@ -24,7 +24,7 @@ const [firstName, ...rest] = PROFILE.name.split(' ');
       <a class="btn ghost" href={L.github} target="_blank" rel="noopener">GitHub</a>
     </div>
     <div class="hero-areas tags">
-      {AREAS.map((a) => <span class="tag">{a}</span>)}
+      {HOME_AREAS.map((a) => <span class="tag">{a}</span>)}
     </div>
   </section>
 
