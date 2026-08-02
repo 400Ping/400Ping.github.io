@@ -37,7 +37,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <Header />
     <main>
-      <slot />
+      <div class="wrap">
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>

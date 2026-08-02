@@ -12,6 +12,8 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
 const L = PROFILE.links;
+const starBadge = (repo: string) =>
+  `https://img.shields.io/github/stars/${repo}?style=flat&logo=github&logoColor=888&label=%E2%98%85&labelColor=00000000&color=888888`;
 ---
 
 <BaseLayout>
@@ -19,10 +21,8 @@ const L = PROFILE.links;
     <h1>{PROFILE.name}</h1>
     <div class="identity">{PROFILE.identity.join(' · ')}</div>
     <div class="contacts">
-      <a href={`mailto:${L.email}`}>{L.email}</a>
-      <span class="sep">|</span>
+      <a href={`mailto:${L.email}`}>Email</a>
       <a href={L.github} target="_blank" rel="noopener">GitHub</a>
-      <span class="sep">|</span>
       <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </header>
@@ -31,38 +31,41 @@ const L = PROFILE.links;
     {ABOUT.map((para) => <p set:html={para} />)}
   </section>
 
-  <h2>News</h2>
+  <h2 class="section-title">News</h2>
   <ul class="news">
     {
       NEWS.map((n) => (
         <li>
-          <span class="when">{n.date}</span> — <span set:html={n.html} />
+          <div class="when">{n.date}</div>
+          <div class="what" set:html={n.html} />
         </li>
       ))
     }
   </ul>
 
-  <h2>Open Source</h2>
+  <h2 class="section-title">Open Source</h2>
   {
     OPENSOURCE.map((proj) => (
-      <div class="os-project">
-        <h3><a href={proj.href} target="_blank" rel="noopener">{proj.name}</a></h3>
-        <span> — {proj.role}</span>
-        <div class="os-meta">{proj.period}</div>
-        <ul class="os-items">
+      <div class="project">
+        <div class="project-head">
+          <span class="name"><a href={proj.href} target="_blank" rel="noopener">{proj.name}</a></span>
+          {proj.repo && (
+            <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener" aria-label={`${proj.name} on GitHub`}>
+              <img class="badge" src={starBadge(proj.repo)} alt={`GitHub stars for ${proj.repo}`} loading="lazy" decoding="async" height="20" />
+            </a>
+          )}
+          <span class="role">{proj.role}</span>
+        </div>
+        <div class="period">{proj.period}</div>
+        <ul class="project-items">
           {proj.items.map((item) => (
             <li>
               <span set:html={item.html} />
               {item.links.length > 0 && (
-                <span class="reflist">
-                  {' ('}
-                  {item.links.map((lk, i) => (
-                    <>
-                      {i > 0 && ', '}
-                      <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
-                    </>
+                <span class="refs">
+                  {item.links.map((lk) => (
+                    <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
                   ))}
-                  {')'}
                 </span>
               )}
             </li>
@@ -72,7 +75,7 @@ const L = PROFILE.links;
     ))
   }
 
-  <h2>Talks &amp; Articles</h2>
+  <h2 class="section-title">Talks &amp; Articles</h2>
   <ul class="talks">
     {
       TALKS.map((t) => (
@@ -82,27 +85,35 @@ const L = PROFILE.links;
           ) : (
             <span>{t.title}</span>
           )}
-          {t.venue && <span>. {t.venue}</span>}
+          {t.venue && <span class="venue"> — {t.venue}</span>}
         </li>
       ))
     }
   </ul>
 
-  <h2>Education</h2>
+  <h2 class="section-title">Education</h2>
   {
     EDUCATION.map((e) => (
       <div class="edu">
-        <span class="school">{e.school}</span>, {e.degree}.
-        <span class="detail"> {e.period}{e.note ? ` · ${e.note}` : ''}.</span>
+        <div>
+          <div class="school">{e.school}</div>
+          <div class="degree">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
+        </div>
+        <div class="period">{e.period}</div>
       </div>
     ))
   }
 
-  <h2>Skills</h2>
+  <h2 class="section-title">Skills</h2>
   <div class="skills">
     {
       SKILLS.map((s) => (
-        <p><span class="label">{s.group}:</span> {s.items.join(', ')}</p>
+        <div class="skills-group">
+          <span class="label">{s.group}</span>
+          <div class="tags">
+            {s.items.map((it) => <span class="tag">{it}</span>)}
+          </div>
+        </div>
       ))
     }
   </div>
@@ -110,16 +121,16 @@ const L = PROFILE.links;
   {
     posts.length > 0 && (
       <>
-        <h2>Writing</h2>
+        <h2 class="section-title">Writing</h2>
         <ul class="post-list">
           {posts.map((post) => (
             <li>
-              <span class="date">{fmt(post.data.pubDate)}</span> — {' '}
               <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+              <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
             </li>
           ))}
         </ul>
-        <p><a href="/blog/">More →</a></p>
+        <p style="margin-top:1.1rem"><a href="/blog/">All posts →</a></p>
       </>
     )
   }
