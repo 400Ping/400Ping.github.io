@@ -7,10 +7,8 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
-  wide?: boolean;
 }
-const { title, description, wide } = Astro.props;
-const containerClass = wide ? 'wrap-wide' : 'wrap';
+const { title, description } = Astro.props;
 const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
 const pageDesc = description ?? SITE.description;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -39,9 +37,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <Header />
     <main>
-      <div class={containerClass}>
-        <slot />
-      </div>
+      <slot />
     </main>
     <Footer />
   </body>

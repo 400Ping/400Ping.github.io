@@ -11,17 +11,17 @@ const fmt = (d: Date) => d.toLocaleDateString('en-CA');
 
 <BaseLayout title="Writing" description="Notes on systems, ML infra, and open source.">
   <h1>Writing</h1>
-  <p class="muted">Notes on systems, ML infrastructure, and open source.</p>
+  <p>Notes on systems, ML infrastructure, and open source.</p>
 
   {
     posts.length === 0 ? (
-      <p class="muted">No posts yet.</p>
+      <p>No posts yet.</p>
     ) : (
       <ul class="post-list">
         {posts.map((post) => (
           <li>
+            <span class="date">{fmt(post.data.pubDate)}</span> — {' '}
             <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
           </li>
         ))}
       </ul>

@@ -7,4 +7,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://400ping.github.io',
   integrations: [sitemap()],
+  markdown: {
+    // 關掉語法上色，讓程式碼區塊維持單色 old-school 風格（用 global.css 的樣式）。
+    syntaxHighlight: false,
+  },
 });

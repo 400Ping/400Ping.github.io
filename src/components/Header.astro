@@ -1,21 +1,19 @@
 ---
-import { SITE, NAV_LINKS } from '../consts';
+import { NAV_LINKS } from '../consts';
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href);
 ---
 
-<header class="site-header">
-  <div class="wrap">
-    <nav>
-      <a class="brand" href="/">{SITE.title}</a>
-      {
-        NAV_LINKS.map((link) => (
-          <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
-            {link.label}
-          </a>
-        ))
-      }
-    </nav>
-  </div>
-</header>
+<nav class="topnav">
+  {
+    NAV_LINKS.map((link, i) => (
+      <>
+        {i > 0 && <span class="sep">·</span>}
+        <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
+          {link.label}
+        </a>
+      </>
+    ))
+  }
+</nav>
