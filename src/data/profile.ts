@@ -73,5 +73,5 @@ export const ABOUT = [
    orchestration.`,
   `Most of that infrastructure work happens in the open. I'm a PMC member and committer for
    <strong>Apache Mahout</strong>, and a regular contributor to <strong>Ray</strong> and
-   <strong>KubeRay</strong> (<strong>77+ PRs</strong>, <strong>96+ reviews</strong>).`,
+   <strong>KubeRay</strong>.`,
 ];

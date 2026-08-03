@@ -15,11 +15,11 @@ export const OPENSOURCE = [
         links: [{ label: 'qumat-qdp', href: 'https://github.com/apache/mahout' }],
       },
       {
-        html: `<strong>Community leadership</strong> — lead discussions and meetings, mentor contributors, and authored a demo paper.`,
+        html: `<strong>Community leadership</strong> — lead community discussions, meetings, and mentor contributors.`,
         links: [],
       },
       {
-        html: `<strong>AMD ecosystem</strong> — initiated a collaboration between AMD Taiwan, ITRI, and Apache Mahout; leading AMD ecosystem support in Mahout.`,
+        html: `<strong>AMD ecosystem</strong> — initiated a collaboration between AMD Taiwan, ITRI, Apache Mahout and leading AMD ecosystem support.`,
         links: [],
       },
     ],
