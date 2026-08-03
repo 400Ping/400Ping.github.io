@@ -170,6 +170,16 @@ main { padding: 3rem 0 0; }
   background: var(--surface); box-shadow: var(--shadow);
   padding: 1.1rem 1.25rem; margin-bottom: 1rem;
 }
+/* small white logo tile — keeps monochrome logos visible in dark mode too */
+.logo-tile {
+  width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+  background: #fff; border: 1px solid var(--border);
+  display: inline-flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.logo-tile img { width: 21px; height: 21px; object-fit: contain; display: block; }
+.logo-tile.sm { width: 26px; height: 26px; border-radius: 7px; }
+.logo-tile.sm img { width: 18px; height: 18px; }
+
 .project-head { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
 .project-head .name { font-size: 1.1rem; font-weight: 650; }
 .project-head .name a { color: var(--fg); }
@@ -216,7 +226,8 @@ main { padding: 3rem 0 0; }
 .talks .venue { color: var(--faint); font-size: 0.85rem; }
 
 /* ---------- education ---------- */
-.edu { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: baseline; }
+.edu { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.edu-left { display: flex; align-items: center; gap: 0.65rem; }
 .edu .school { font-weight: 650; }
 .edu .degree { color: var(--muted); font-size: 0.95rem; }
 .edu .period { color: var(--faint); font-size: 0.82rem; font-variant-numeric: tabular-nums; }

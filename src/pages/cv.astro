@@ -45,6 +45,9 @@ const starBadge = (repo: string) =>
     OPENSOURCE.map((proj) => (
       <div class="project">
         <div class="project-head">
+          {proj.icon && (
+            <span class="logo-tile"><img src={proj.icon} alt={`${proj.name} logo`} loading="lazy" decoding="async" /></span>
+          )}
           <span class="name"><a href={proj.href} target="_blank" rel="noopener">{proj.name}</a></span>
           {proj.repo && (
             <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener" aria-label={`${proj.name} on GitHub`}>
@@ -121,9 +124,14 @@ const starBadge = (repo: string) =>
   {
     EDUCATION.map((e) => (
       <div class="edu">
-        <div>
-          <div class="school">{e.school}</div>
-          <div class="degree">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
+        <div class="edu-left">
+          {e.icon && (
+            <span class="logo-tile sm"><img src={e.icon} alt={`${e.school} logo`} loading="lazy" decoding="async" /></span>
+          )}
+          <div>
+            <div class="school">{e.school}</div>
+            <div class="degree">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
+          </div>
         </div>
         <div class="period">{e.period}</div>
       </div>

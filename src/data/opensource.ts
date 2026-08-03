@@ -1,12 +1,14 @@
 // Open source — the centerpiece.
 // `repo` (owner/name) renders a live GitHub star badge next to the project title.
+// `icon` (optional) is a small logo shown before the name — files live in public/icons/.
 export const OPENSOURCE = [
   {
     name: 'Apache Mahout',
     repo: 'apache/mahout',
+    icon: '/icons/mahout.png',
     role: 'PMC Member & Committer',
     period: 'Nov 2025 – Present · committer since Jan. 2026',
-    href: 'https://mahout.apache.org/',
+    href: 'https://github.com/apache/mahout',
     items: [
       {
         html: `<strong>Co-Authored QDP (Quantum Data Plane)</strong> — encode classical data into quantum states with GPU-accelerated kernels.`,
@@ -25,6 +27,7 @@ export const OPENSOURCE = [
   {
     name: 'Ray',
     repo: 'ray-project/ray',
+    icon: '/icons/ray.png',
     role: 'Contributor',
     period: 'Feb 2025 – Present',
     href: 'https://github.com/ray-project/ray',
@@ -62,6 +65,7 @@ export const OPENSOURCE = [
   {
     name: 'KubeRay',
     repo: 'ray-project/kuberay',
+    icon: '/icons/kuberay.png',
     role: 'Contributor',
     period: 'Feb 2025 – Present',
     href: 'https://github.com/ray-project/kuberay',

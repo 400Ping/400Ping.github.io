@@ -49,6 +49,7 @@ export const TALKS = [
 export const EDUCATION = [
   {
     school: 'Yuan Ze University',
+    icon: '/icons/yzu.png',
     degree: 'B.S. in Electrical Engineering',
     period: 'Sep 2023 – Jun 2027 (expected)',
     note: 'GPA 3.43 / 4.0',
