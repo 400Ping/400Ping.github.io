@@ -1,17 +1,17 @@
 // Publications, Talks & Articles, Education, Skills.
 
-// Publications. Fill in the real details; each `links` entry with an empty
-// href is skipped, so you can leave placeholders until you have the URL.
+// Publications. Each `links` entry with an empty href is skipped,
+// so you can leave a placeholder until you have the URL.
 export const PUBLICATIONS = [
   {
-    title: 'QDP: A Quantum Data Plane for GPU-Accelerated Encoding', // TODO: exact paper title
-    authors: 'Jie-Kai Chang, et al.', // TODO: full author list
-    venue: 'Demo paper', // TODO: venue + year, e.g. "ApacheCon 2026"
-    year: '2026',
+    title: 'Apache Mahout QDP: GPU-Accelerated Quantum Data Plane',
+    authors:
+      'Jie-Kai Chang*, Guan-Ming Chiu*, Hsien-Cheng Huang*, Kuan-Hao Huang*, Guan-Hua Wen*',
+    venue: 'Preprint',
+    year: '',
+    icon: '/icons/arxiv.png',
     links: [
-      { label: 'PDF', href: '' },
-      { label: 'arXiv', href: '' },
-      { label: 'Code', href: '' },
+      { label: 'arXiv', href: '' }, // TODO: paste the arXiv URL here
     ],
   },
 ];
@@ -43,6 +43,26 @@ export const TALKS = [
     title: 'Beyond the Hardware Hub: How ALC Taipei Turned Computex 2026 into a Milestone for the Apache Way',
     venue: 'The ASF Blog',
     href: 'https://news.apache.org/foundation/entry/beyond-the-hardware-hub-how-alc-taipei-turned-computex-2026-into-a-milestone-for-the-apache-way',
+  },
+];
+
+// Community & service roles.
+export const COMMUNITY = [
+  {
+    role: 'Member',
+    org: 'opensource4you (ALC Taipei)',
+    period: 'Sep 2024 – Present',
+    desc: 'ALC Taipei — Community Development, Apache Software Foundation.',
+    href: 'https://cwiki.apache.org/confluence/spaces/COMDEV/pages/370444897/ALC+Taipei',
+    icon: '/icons/alc.png',
+  },
+  {
+    role: 'Mentor',
+    org: 'Google Summer of Code',
+    period: 'Feb 2026 – Present',
+    desc: 'Mentor for Apache Mahout.',
+    href: 'https://summerofcode.withgoogle.com/',
+    icon: '/icons/gsoc.png',
   },
 ];
 

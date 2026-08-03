@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { PROFILE, ABOUT, AREAS } from '../data/profile';
 import { OPENSOURCE } from '../data/opensource';
-import { PUBLICATIONS, TALKS, EDUCATION, SKILLS } from '../data/misc';
+import { PUBLICATIONS, COMMUNITY, TALKS, EDUCATION, SKILLS } from '../data/misc';
 
 const L = PROFILE.links;
 const starBadge = (repo: string) =>
@@ -64,6 +64,31 @@ const starBadge = (repo: string) =>
     ))
   }
 
+  <h2 class="section-title">Community &amp; Service</h2>
+  {
+    COMMUNITY.map((c) => (
+      <div class="svc">
+        <div class="svc-left">
+          {c.icon && (
+            <span class="logo-tile"><img src={c.icon} alt={`${c.org} logo`} loading="lazy" decoding="async" /></span>
+          )}
+          <div>
+            <div class="svc-role">
+              <strong>{c.role}</strong> ·{' '}
+              {c.href ? (
+                <a href={c.href} target="_blank" rel="noopener">{c.org}</a>
+              ) : (
+                <span>{c.org}</span>
+              )}
+            </div>
+            <div class="svc-desc">{c.desc}</div>
+          </div>
+        </div>
+        <div class="period">{c.period}</div>
+      </div>
+    ))
+  }
+
   {
     PUBLICATIONS.length > 0 && (
       <>
@@ -73,18 +98,23 @@ const starBadge = (repo: string) =>
             const links = p.links.filter((l) => l.href);
             return (
               <li class="pub">
-                <div class="title">{p.title}</div>
-                {p.authors && (
-                  <div class="authors" set:html={p.authors.replace(/Jie-Kai Chang/g, '<span class="me">Jie-Kai Chang</span>')} />
+                {p.icon && (
+                  <span class="logo-tile"><img src={p.icon} alt="arXiv" loading="lazy" decoding="async" /></span>
                 )}
-                <div class="venue">{[p.venue, p.year].filter(Boolean).join(', ')}</div>
-                {links.length > 0 && (
-                  <div class="refs">
-                    {links.map((l) => (
-                      <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
-                    ))}
-                  </div>
-                )}
+                <div class="pub-body">
+                  <div class="title">{p.title}</div>
+                  {p.authors && (
+                    <div class="authors" set:html={p.authors.replace(/Jie-Kai Chang/g, '<span class="me">Jie-Kai Chang</span>')} />
+                  )}
+                  <div class="venue">{[p.venue, p.year].filter(Boolean).join(', ')}</div>
+                  {links.length > 0 && (
+                    <div class="refs">
+                      {links.map((l) => (
+                        <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </li>
             );
           })}

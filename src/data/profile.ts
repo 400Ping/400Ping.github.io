@@ -67,7 +67,7 @@ export const ABOUT_MORE = [
 export const ABOUT = [
   `I'm an undergrad at Yuan Ze University working at the intersection of research and
    infrastructure. My research spans <strong>machine learning</strong> — LLMs, computer vision,
-   multimodal models, RL, and inference — and the <strong>systems</strong> that run it:
+   multimodal, inference, and RL — and the <strong>systems</strong> that run it:
    distributed systems, parallel computing, GPU acceleration, and Kubernetes. I build the
    <strong>AI/ML infrastructure</strong> that ties the two together, from GPU kernels to cluster
    orchestration.`,

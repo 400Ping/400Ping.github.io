@@ -1,6 +1,6 @@
 // Site-wide constants — edit here.
 export const SITE = {
-  title: "Jie-Kai Chang's Website",
+  title: "Jie-Kai's Website",
   author: 'Jie-Kai Chang',
   tagline: 'Research across distributed systems, parallel computing, inference, reinforcement learning, multimodal and the infrastructure behind it.',
   description:

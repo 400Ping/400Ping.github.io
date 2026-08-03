@@ -12,7 +12,7 @@ export const OPENSOURCE = [
     items: [
       {
         html: `<strong>Co-Authored QDP (Quantum Data Plane)</strong> — encode classical data into quantum states with GPU-accelerated kernels.`,
-        links: [{ label: 'qumat-qdp', href: 'https://github.com/apache/mahout' }],
+        links: [{ label: 'qumat-qdp', href: 'https://pypi.org/project/qumat-qdp/' }],
       },
       {
         html: `<strong>Community leadership</strong> — lead community discussions, meetings, and mentor contributors.`,
