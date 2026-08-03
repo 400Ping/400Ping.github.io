@@ -65,7 +65,7 @@ export const OPENSOURCE = [
   {
     name: 'KubeRay',
     repo: 'ray-project/kuberay',
-    icon: '/icons/kuberay.png',
+    icon: '/icons/ray.png',
     role: 'Contributor',
     period: 'Feb 2025 – Present',
     href: 'https://github.com/ray-project/kuberay',
