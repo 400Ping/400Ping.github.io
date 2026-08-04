@@ -2,11 +2,24 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
-
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
+const touched = (p: any) => (p.data.updatedDate ?? p.data.pubDate).valueOf();
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Group by topic/project, newest-touched first within and across groups.
+const groupsMap = new Map<string, typeof posts>();
+for (const post of posts) {
+  const key = post.data.project ?? 'Notes';
+  if (!groupsMap.has(key)) groupsMap.set(key, []);
+  groupsMap.get(key)!.push(post);
+}
+const groups = [...groupsMap.entries()]
+  .map(([topic, items]) => ({
+    topic,
+    items: items.sort((a, b) => touched(b) - touched(a)),
+  }))
+  .sort((a, b) => touched(b.items[0]) - touched(a.items[0]));
 ---
 
 <BaseLayout title="Blog" description="Notes on systems, ML infra, and open source.">
@@ -15,18 +28,36 @@ const fmt = (d: Date) => d.toLocaleDateString('en-CA');
     <div class="identity">Notes on LLM/ML, ML infrastructure, systems, venture capital, and more.</div>
   </header>
 
+  <p class="muted" style="margin-top:-0.4rem">
+    Living notes, grouped by topic — many of these get updated as the work evolves, so check the
+    <em>Last updated</em> date rather than when they were first posted.
+  </p>
+
   {
     posts.length === 0 ? (
       <p class="muted">No posts yet.</p>
     ) : (
-      <ul class="post-list">
-        {posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.id}/`}>{post.data.title}</a>
-            <time datetime={post.data.pubDate.toISOString()}>{fmt(post.data.pubDate)}</time>
-          </li>
-        ))}
-      </ul>
+      groups.map((group) => (
+        <>
+          <h2 class="section-title">{group.topic}</h2>
+          <ul class="post-list">
+            {group.items.map((post) => {
+              const updated = post.data.updatedDate;
+              return (
+                <li>
+                  <div class="pl-main">
+                    <a href={`/blog/${post.id}/`}>{post.data.title}</a>
+                    {post.data.description && <span class="pl-desc">{post.data.description}</span>}
+                  </div>
+                  <time class="pl-date" datetime={(updated ?? post.data.pubDate).toISOString()}>
+                    {updated ? `Updated ${fmt(updated)}` : fmt(post.data.pubDate)}
+                  </time>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      ))
     )
   }
 </BaseLayout>

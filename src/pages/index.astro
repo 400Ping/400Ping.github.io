@@ -3,8 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { PROFILE, TAGLINE, HOME_INTRO, HOME_AREAS } from '../data/profile';
 
+const touched = (p: any) => (p.data.updatedDate ?? p.data.pubDate).valueOf();
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .sort((a, b) => touched(b) - touched(a))
   .slice(0, 2);
 
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
@@ -35,7 +36,10 @@ const [firstName, ...rest] = PROFILE.name.split(' ');
         <div class="blog-cards">
           {posts.map((post) => (
             <a class="blog-card" href={`/blog/${post.id}/`}>
-              <span class="date">{fmt(post.data.pubDate)}</span>
+              <span class="date">
+                {post.data.project && <span class="card-topic">{post.data.project}</span>}
+                {post.data.updatedDate ? `Updated ${fmt(post.data.updatedDate)}` : fmt(post.data.pubDate)}
+              </span>
               <span class="title">{post.data.title}</span>
               {post.data.description && <p class="excerpt">{post.data.description}</p>}
             </a>

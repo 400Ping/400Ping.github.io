@@ -7,10 +7,17 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    // 文章日期，格式 YYYY-MM-DD
+    // First published, YYYY-MM-DD.
     pubDate: z.coerce.date(),
+    // Last touched. For a living/topic post, bump this whenever you update it.
     updatedDate: z.coerce.date().optional(),
-    // 設 true 可暫時不發佈這篇
+    // Topic this post belongs to, e.g. "Ray", "KubeRay", "Mahout". Groups the blog index.
+    project: z.string().optional(),
+    // Changelog for a living post — newest first. Each entry: { date, note }.
+    log: z
+      .array(z.object({ date: z.coerce.date(), note: z.string() }))
+      .default([]),
+    // Set true to keep a post unpublished.
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
   }),

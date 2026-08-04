@@ -2,6 +2,7 @@
 title: On reading code you didn't write
 description: Most of open source is reading, not writing. A few habits that help.
 pubDate: 2026-07-15
+project: Notes
 tags: [open-source, systems, notes]
 ---
 

@@ -81,11 +81,41 @@ Frontmatter fields:
 | Field         | Required | What it does |
 | ------------- | -------- | ------------ |
 | `title`       | **yes**  | Post title (shown in lists, the post page, and the browser tab). |
-| `pubDate`     | **yes**  | Publish date, `YYYY-MM-DD`. Posts are sorted newest-first by this. |
-| `description` | no       | One-line summary. Shown on the home page cards and used for SEO/social previews. |
+| `pubDate`     | **yes**  | First published date, `YYYY-MM-DD`. |
+| `description` | no       | One-line summary. Shown on the blog list and home cards, and used for SEO/social previews. |
+| `project`     | no       | Topic this post belongs to, e.g. `Ray`, `KubeRay`, `Mahout`. The blog page groups posts by this. |
+| `updatedDate` | no       | `YYYY-MM-DD`. Bump this whenever you edit a living post — the blog orders by it and shows "Last updated". |
+| `log`         | no       | A changelog for a living post (see below). |
 | `tags`        | no       | A list like `[ray, systems]`. Leave as `[]` or omit if none. |
 | `draft`       | no       | `true` hides the post from the site (see below). Defaults to `false`. |
-| `updatedDate` | no       | `YYYY-MM-DD` — shown as "updated ..." if the post changed later. |
+
+### Living / topic posts
+
+This blog is organized **by topic**, not as one-off dated articles. A post like "Ray Data compute
+expressions" is a single living document that you keep editing as the work evolves. To do that:
+
+1. Give the post a `project:` (the topic it belongs to). The blog page groups posts under their
+   topic and orders topics by whichever was touched most recently.
+2. Each time you update the post, bump `updatedDate:` to today. The blog shows "Last updated …"
+   and floats the post to the top.
+3. Optionally keep a `log:` — a changelog rendered at the bottom of the post so readers can see
+   what changed and when. **Newest entry first:**
+
+```markdown
+---
+title: Ray Data compute expressions
+pubDate: 2026-06-01
+updatedDate: 2026-08-04
+project: Ray
+log:
+  - date: 2026-08-04
+    note: Shipped fixed-size array support; started the .image namespace.
+  - date: 2026-07-10
+    note: Landed datetime support in the .dt namespace.
+---
+```
+
+See `src/content/blog/ray-data-compute-expressions.md` for a full example.
 
 ### 3. Write the body in Markdown
 

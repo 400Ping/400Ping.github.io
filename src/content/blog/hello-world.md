@@ -2,6 +2,7 @@
 title: How this site is built
 description: A static personal site with Astro, deployed to GitHub Pages.
 pubDate: 2026-08-02
+project: Meta
 tags: [astro, web, meta]
 ---
 
