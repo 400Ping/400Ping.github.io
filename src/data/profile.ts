@@ -5,7 +5,7 @@ export const PROFILE = {
   identity: [
     'B.S. in Electrical Engineering, Yuan Ze University',
     'Apache Mahout PMC Member & Committer',
-    'Ray/KubeRay contributor',
+    'Ray & KubeRay Contributor',
   ],
   location: 'Taipei, Taiwan',
   links: {
@@ -39,6 +39,7 @@ export const AREAS = [
   'Multimodal',
   'Reinforcement learning',
   'Inference',
+  'Training',
   'ML systems',
   'Distributed systems',
   'Parallel computing',
@@ -66,12 +67,10 @@ export const ABOUT_MORE = [
 // Bio paragraphs (HTML allowed). Keep it short and in your own voice.
 export const ABOUT = [
   `I'm an undergrad at Yuan Ze University working at the intersection of research and
-   infrastructure. My research spans <strong>machine learning</strong> — LLMs, computer vision,
-   multimodal, inference, and RL — and the <strong>systems</strong> that run it:
-   distributed systems, parallel computing, GPU acceleration, and Kubernetes. I build the
-   <strong>AI/ML infrastructure</strong> that ties the two together, from GPU kernels to cluster
-   orchestration.`,
-  `Most of that infrastructure work happens in the open. I'm a PMC member and committer for
-   <strong>Apache Mahout</strong>, and a regular contributor to <strong>Ray</strong> and
+   infrastructure. My work spans <strong>Machine Learning</strong> (LLMs, Computer Vision,
+   Multimodal, Inference, Training, RL) and the <strong>Systems</strong> that run it (Distributed Systems, Parallel Computing, GPU Acceleration, Kubernetes). 
+   `,
+  `Most of that infrastructure work happens in the open. I'm a PMC Member & Committer for
+   <strong>Apache Mahout</strong>, and a core contributor to <strong>Ray</strong> &
    <strong>KubeRay</strong>.`,
 ];
