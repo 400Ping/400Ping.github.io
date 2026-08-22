@@ -7,7 +7,10 @@ const isActive = (href: string) =>
 
 <header class="site-header">
   <nav>
-    <a class="brand" href="/">{SITE.title}</a>
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/favicon.png" alt="" width="26" height="26" />
+      <span>{SITE.title}</span>
+    </a>
     {
       NAV_LINKS.map((link) => (
         <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
