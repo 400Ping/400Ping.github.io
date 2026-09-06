@@ -1,19 +1,12 @@
 ---
-import { SITE, SOCIAL_LINKS } from '../consts';
+import { SITE } from '../consts';
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="wrap">
-    <div class="social">
-      {
-        SOCIAL_LINKS.map((link) => (
-          <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
-            {link.label}
-          </a>
-        ))
-      }
-    </div>
-    <div>© {year} {SITE.author}</div>
+  <div>© {year} {SITE.author}</div>
+  <div>
+    Built with <a href="https://astro.build/" target="_blank" rel="noopener">Astro</a> ·
+    <a href={SITE.repo} target="_blank" rel="noopener">Source</a>
   </div>
 </footer>

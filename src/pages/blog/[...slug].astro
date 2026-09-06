@@ -20,24 +20,20 @@ const changelog = [...post.data.log].sort((a, b) => b.date.valueOf() - a.date.va
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="article">
-    {post.data.project && <a class="topic-badge" href="/blog/">{post.data.project}</a>}
-    <h1>{post.data.title}</h1>
-    <div class="post-meta">
-      <span>Published {fmt(post.data.pubDate)}</span>
-      {post.data.updatedDate && <span> · Last updated {fmt(post.data.updatedDate)}</span>}
-      {
-        post.data.tags.length > 0 && (
-          <div style="margin-top:0.5rem">
-            {post.data.tags.map((t) => (
-              <span class="tag-inline">#{t}</span>
-            ))}
-          </div>
-        )
-      }
-    </div>
+  <article class="shell shell--narrow">
+    <header class="article-head">
+      {post.data.project && <p class="micro-label"><a href="/blog/" style="color:inherit;text-decoration:none">{post.data.project}</a></p>}
+      <h1>{post.data.title}</h1>
+      <div class="post-meta">
+        <span>Published {fmt(post.data.pubDate)}</span>
+        {post.data.updatedDate && <span>Updated {fmt(post.data.updatedDate)}</span>}
+        {post.data.tags.length > 0 && <span>{post.data.tags.map((t) => `#${t}`).join(' ')}</span>}
+      </div>
+    </header>
 
-    <Content />
+    <div class="article-body">
+      <Content />
+    </div>
 
     {
       changelog.length > 0 && (
@@ -55,6 +51,6 @@ const changelog = [...post.data.log].sort((a, b) => b.date.valueOf() - a.date.va
       )
     }
 
-    <a class="back-link" href="/blog/">← Back to writing</a>
+    <p class="article-foot"><a href="/blog/">← All writing</a></p>
   </article>
 </BaseLayout>

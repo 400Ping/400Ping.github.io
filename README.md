@@ -1,7 +1,9 @@
 # Jie-Kai Chang's Website
 
-Personal website — a landing page, a CV, and a blog. Built with [Astro](https://astro.build/)
-and deployed to GitHub Pages.
+Personal website — a profile page, a CV, and a blog of living notes. Built with
+[Astro](https://astro.build/) and deployed to GitHub Pages.
+
+The look is an "editorial paper" style paper background, Newsreader serif headings, Noto Sans body, IBM Plex Mono labels, hairline rules, square corners, no cards, badges, or dark mode. All of it lives in one stylesheet.
 
 **Live:** <https://400ping.github.io/>
 
@@ -9,7 +11,12 @@ and deployed to GitHub Pages.
 
 ## Local development
 
-You need [Node.js](https://nodejs.org/) 20+.
+You need [Node.js](https://nodejs.org/) **20 or newer** (Astro 5 refuses to build on 18). If your
+shell's default `node` is an older nvm version, put a newer one first on the PATH, e.g.:
+
+```bash
+PATH=/usr/local/bin:$PATH npm run build
+```
 
 ```bash
 npm install      # first time only — install dependencies
@@ -27,16 +34,17 @@ Leave `npm run dev` running while you edit; the browser refreshes automatically 
 ```
 src/
   pages/
-    index.astro        Home (landing page)
-    cv.astro           CV (experience, publications, talks, education, skills)
+    index.astro        Home: profile intro + side notes, research areas, recent writing, contact
+    cv.astro           CV (experience, community, publications, talks, education, skills)
+    404.astro          Not-found page
     blog/
-      index.astro      Blog index (list of posts)
+      index.astro      Writing index (posts grouped by topic)
       [...slug].astro  Renders each individual post
   data/                All editable content lives here (plain data files):
-    profile.ts           name, intro, taglines, research areas
-    opensource.ts        Open-source experience (project cards)
-    misc.ts              talks, publications, education, skills
-    news.ts              news items
+    profile.ts           name, role line, bio, side notes, research areas, contact copy
+    opensource.ts        Open-source experience (one entry per project)
+    misc.ts              community roles, publications, talks, education, skills
+    news.ts              news items (currently not rendered anywhere)
   content/blog/        Blog posts — one Markdown file per post
   components/          Header / Footer
   layouts/             Shared page shell (BaseLayout.astro)
@@ -82,7 +90,7 @@ Frontmatter fields:
 | ------------- | -------- | ------------ |
 | `title`       | **yes**  | Post title (shown in lists, the post page, and the browser tab). |
 | `pubDate`     | **yes**  | First published date, `YYYY-MM-DD`. |
-| `description` | no       | One-line summary. Shown on the blog list and home cards, and used for SEO/social previews. |
+| `description` | no       | One-line summary. Shown on the blog list and the home page, and used for SEO/social previews. |
 | `project`     | no       | Topic this post belongs to, e.g. `Ray`, `KubeRay`, `Mahout`. The blog page groups posts by this. |
 | `updatedDate` | no       | `YYYY-MM-DD`. Bump this whenever you edit a living post — the blog orders by it and shows "Last updated". |
 | `log`         | no       | A changelog for a living post (see below). |
@@ -116,6 +124,10 @@ log:
 ```
 
 See `src/content/blog/ray-data-compute-expressions.md` for a full example.
+
+**Watch out for `#` in YAML.** A bare ` #` starts a comment, so a note like
+`Landed PR #58740` gets cut off at "PR". Wrap the value in quotes:
+`note: "Landed datetime support (PR #58740, #58741)."`
 
 ### 3. Write the body in Markdown
 
@@ -157,7 +169,7 @@ with a root-relative path:
 ### 4. Preview it
 
 With `npm run dev` running, open <http://localhost:4321/blog/> — your post appears in the list,
-and the two most recent posts also show on the home page.
+and the three most recently updated posts also show on the home page.
 
 ### 5. Drafts
 
@@ -182,12 +194,11 @@ git push
 
 | I want to change…                     | Edit this |
 | ------------------------------------- | --------- |
-| Name, intro, taglines, research areas | `src/data/profile.ts` |
-| Open-source experience / project cards | `src/data/opensource.ts` |
-| Talks, publications, education, skills | `src/data/misc.ts` |
-| News items                            | `src/data/news.ts` |
-| Nav links / site title / social links | `src/consts.ts` |
-| Colors, fonts, spacing                | `src/styles/global.css` |
+| Name, role line, bio, side notes, research questions, contact copy | `src/data/profile.ts` |
+| Open-source experience entries        | `src/data/opensource.ts` |
+| Community, publications, talks, education, skills | `src/data/misc.ts` |
+| Nav links / header affiliation / social links / source-repo link | `src/consts.ts` |
+| Colors, fonts, spacing (design tokens in `:root`) | `src/styles/global.css` |
 | Project / school logos                | drop a PNG in `public/icons/` and point the `icon:` field at it |
 
 ---

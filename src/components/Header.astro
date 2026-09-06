@@ -1,22 +1,35 @@
 ---
-import { SITE, NAV_LINKS } from '../consts';
+import { SITE, NAV_LINKS, SOCIAL_LINKS } from '../consts';
 const path = Astro.url.pathname;
-const isActive = (href: string) =>
-  href === '/' ? path === '/' : path.startsWith(href);
+// Only real pages get an active state; hash links to home sections never do.
+const isActive = (href: string) => !href.includes('#') && href !== '/' && path.startsWith(href);
 ---
 
-<header class="site-header">
-  <nav>
-    <a class="brand" href="/">
-      <img class="brand-logo" src="/favicon.png" alt="" width="26" height="26" />
-      <span>{SITE.title}</span>
-    </a>
-    {
-      NAV_LINKS.map((link) => (
-        <a href={link.href} aria-current={isActive(link.href) ? 'page' : undefined}>
-          {link.label}
-        </a>
-      ))
-    }
-  </nav>
+<header class="site-header" aria-label="Primary navigation">
+  <div class="site-header__inner">
+    <a class="wordmark" href="/">{SITE.author}</a>
+    <span class="affiliation">{SITE.affiliation}</span>
+    <nav class="primary-nav" aria-label="Sections">
+      {
+        NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class:list={[{ 'is-active': isActive(link.href) }]}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <nav class="profile-nav" aria-label="Profiles">
+      {
+        SOCIAL_LINKS.map((link) => (
+          <a href={link.href} target={link.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+            {link.label}{link.href.startsWith('http') ? ' ↗' : ''}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
 </header>

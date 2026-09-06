@@ -1,11 +1,11 @@
-// Identity + bio, shown in the masthead.
+// Identity + bio. Everything on the home page is edited here.
 export const PROFILE = {
   name: 'Jie-Kai Chang',
-  // One-line identity under the name (parts are joined with · )
+  // One-line identity under the name on the CV page (parts are joined with · )
   identity: [
     'B.S. in Electrical Engineering, Yuan Ze University',
-    'Apache Mahout PMC Member & Committer',
-    'Ray & KubeRay Contributor',
+    'Vice President (PMC Chair) & Committer, Apache Mahout',
+    'Ray & KubeRay Member',
   ],
   location: 'Taipei, Taiwan',
   links: {
@@ -15,22 +15,61 @@ export const PROFILE = {
   },
 };
 
-// One-line tagline for the home hero.
-export const TAGLINE =
-  'Researching LLM/ML and the infrastructure that runs them.';
+// Small label above the name on the home page.
+export const MICRO_LABEL = 'Profile / 2026';
 
-// Short intro shown under the name on the home page.
-export const HOME_INTRO =
-  `Researching LLM/ML and building the infrastructure that runs them.`;
+// One-line role under the name (serif, large).
+export const ROLE_LINE =
+  'Open-source ML systems engineer working on distributed systems, Kubernetes-native ML infrastructure, and GPU systems.';
 
-// Short area labels for the home page.
-export const HOME_AREAS = [
-  'LLM/ML',
-  'Computer Vision',
-  'GPU acceleration',
-  'ML systems',
-  'Distributed systems',
+// Bio paragraphs (HTML allowed). Used on the home page.
+export const ABOUT = [
+  `I'm an undergraduate at <strong>Yuan Ze University</strong> working at the intersection of
+   research and infrastructure. My work spans <strong>machine learning</strong> (LLMs, computer
+   vision, multimodal, inference, training, RL) and the <strong>systems</strong> that run it
+   (distributed systems, Kubernetes-native ML infrastructure, GPU systems, parallel computing).`,
+  `Most of that work happens in the open. I'm <strong>Vice President (PMC Chair)</strong> &amp;
+   committer of <strong>Apache Mahout</strong>, and a member of <strong>Ray</strong> and
+   <strong>KubeRay</strong>, with 107+ merged pull requests and 135+ merged pull requests
+   reviewed across the three projects.`,
 ];
+
+// Right-hand column on the home page.
+export const SIDE_NOTES = [
+  {
+    label: 'Currently',
+    html: `Leading Apache Mahout as Vice President (PMC Chair); Core contributor of Ray & the KubeRay.`,
+  },
+  {
+    label: 'Open to',
+    html: `Research collaborations, ML-infrastructure work, and mentoring people.`,
+  },
+];
+
+// Research areas, shown as a lettered question list on the home page.
+export const RESEARCH_AREAS = [
+  {
+    index: 'A',
+    title: 'Machine learning & LLMs',
+    question:
+      'How can large language, vision, and multimodal models be trained and served efficiently, and how should inference, training, and reinforcement-learning pipelines be built so they scale without losing reliability?',
+    keywords: 'LLMs / computer vision / multimodal / reinforcement learning / inference / training',
+  },
+  {
+    index: 'B',
+    title: 'Systems for machine learning',
+    question:
+      'How do distributed systems, Kubernetes-native infrastructure, and GPU systems combine into a platform that ML workloads can depend on at scale, and how is that platform kept correct as it grows?',
+    keywords: 'Distributed systems / Kubernetes-native ML infrastructure / GPU systems / parallel computing / ML systems',
+  },
+];
+
+export const RESEARCH_NOTE =
+  'Most of this work is public: the CV lists the projects, pull requests, and talks behind each area.';
+
+// Contact section copy on the home page.
+export const CONTACT_COPY =
+  'If you are working on LLMs, Computer Vision, ML Infrastructure, Distributed Systems or GPU systems, I welcome thoughtful conversations and possible collaborations.';
 
 // Full research areas — shown on the CV page.
 export const AREAS = [
@@ -42,35 +81,7 @@ export const AREAS = [
   'Training',
   'ML systems',
   'Distributed systems',
+  'Kubernetes-native ML infrastructure',
+  'GPU systems',
   'Parallel computing',
-  'GPU acceleration',
-  'Kubernetes',
-];
-
-// Home landing highlights.
-export const STATS = [
-  { value: '77+', label: 'Pull requests' },
-  { value: '96+', label: 'PR reviews' },
-  { value: '3', label: 'Major projects' },
-];
-
-// Extra paragraphs shown only on the About page (after the shared ABOUT bio).
-export const ABOUT_MORE = [
-  `Most of my work happens in the open. I care about code that other people can read,
-   extend, and trust — which is why I spend as much time on reviews, tests, and docs as on
-   features. I also enjoy the community side of open source: mentoring new contributors and
-   helping projects grow their next generation of maintainers.`,
-  `<em>(Add a more personal paragraph here — how you got into systems, what you're
-   exploring lately, or what you do away from the keyboard.)</em>`,
-];
-
-// Bio paragraphs (HTML allowed). Keep it short and in your own voice.
-export const ABOUT = [
-  `I'm an undergrad at Yuan Ze University working at the intersection of research and
-   infrastructure. My work spans <strong>Machine Learning</strong> (LLMs, Computer Vision,
-   Multimodal, Inference, Training, RL) and the <strong>Systems</strong> that run it (Distributed Systems, Parallel Computing, GPU Acceleration, Kubernetes). 
-   `,
-  `Most of that infrastructure work happens in the open. I'm a PMC Member & Committer for
-   <strong>Apache Mahout</strong>, and a core contributor to <strong>Ray</strong> &
-   <strong>KubeRay</strong>.`,
 ];

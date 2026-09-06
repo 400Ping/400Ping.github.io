@@ -1,173 +1,192 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { PROFILE, ABOUT, AREAS } from '../data/profile';
+import { PROFILE, AREAS } from '../data/profile';
 import { OPENSOURCE } from '../data/opensource';
 import { PUBLICATIONS, COMMUNITY, TALKS, EDUCATION, SKILLS } from '../data/misc';
 
 const L = PROFILE.links;
-const starBadge = (repo: string) =>
-  `https://img.shields.io/github/stars/${repo}?style=flat&logo=github&logoColor=888&label=%E2%98%85&labelColor=00000000&color=888888`;
 ---
 
-<BaseLayout title="CV" description="Jie-Kai Chang — CV: open-source experience, education, and skills.">
-  <header class="masthead">
-    <h1>{PROFILE.name}</h1>
-    <div class="identity">{PROFILE.identity.join(' · ')} · {PROFILE.location}</div>
-    <div class="contacts">
-      <a href={`mailto:${L.email}`}>Email</a>
-      <a href={L.github} target="_blank" rel="noopener">GitHub</a>
-      <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </header>
+<BaseLayout title="CV" description="Jie-Kai Chang — CV: open-source experience, community service, publications, talks, education, and skills.">
+  <div class="shell shell--wide">
+    <header class="page-intro">
+      <p class="micro-label">Curriculum vitae / {PROFILE.location}</p>
+      <h1>Open-source work, organized by project.</h1>
+      <p class="page-lead">{PROFILE.identity.join(' · ')}.</p>
+      <p class="mono-links">
+        <a href="/">Profile</a><span>/</span>
+        <a href={`mailto:${L.email}`}>Email</a><span>/</span>
+        <a href={L.github} target="_blank" rel="noopener">GitHub</a><span>/</span>
+        <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </header>
 
-  <section class="about">
-    {ABOUT.map((para) => <p set:html={para} />)}
-  </section>
-
-  <h2 class="section-title">Research areas</h2>
-  <div class="tags">
-    {AREAS.map((a) => <span class="tag">{a}</span>)}
-  </div>
-
-  <h2 class="section-title">Experience</h2>
-  {
-    OPENSOURCE.map((proj) => (
-      <div class="project">
-        <div class="project-head">
-          {proj.icon && (
-            <span class="logo-tile"><img src={proj.icon} alt={`${proj.name} logo`} loading="lazy" decoding="async" /></span>
-          )}
-          <span class="name"><a href={proj.href} target="_blank" rel="noopener">{proj.name}</a></span>
-          {proj.repo && (
-            <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener" aria-label={`${proj.name} on GitHub`}>
-              <img class="badge" src={starBadge(proj.repo)} alt={`GitHub stars for ${proj.repo}`} loading="lazy" decoding="async" height="20" />
-            </a>
-          )}
-          <span class="role">{proj.role}</span>
-        </div>
-        <div class="period">{proj.period}</div>
-        <ul class="project-items">
-          {proj.items.map((item) => (
-            <li>
-              <span set:html={item.html} />
-              {item.links.length > 0 && (
-                <span class="refs">
-                  {item.links.map((lk) => (
-                    <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
-                  ))}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
+    <section class="section-block section-block--tight" id="experience">
+      <div class="section-rail">
+        <h2>Experience</h2>
+        <span class="rail-note">{OPENSOURCE.length} projects</span>
       </div>
-    ))
-  }
-
-  <h2 class="section-title">Community &amp; Service</h2>
-  {
-    COMMUNITY.map((c) => (
-      <div class="svc">
-        <div class="svc-left">
-          {c.icon && (
-            <span class="logo-tile"><img src={c.icon} alt={`${c.org} logo`} loading="lazy" decoding="async" /></span>
-          )}
-          <div>
-            <div class="svc-role">
-              <strong>{c.role}</strong> ·{' '}
-              {c.href ? (
-                <a href={c.href} target="_blank" rel="noopener">{c.org}</a>
-              ) : (
-                <span>{c.org}</span>
-              )}
-            </div>
-            <div class="svc-desc">{c.desc}</div>
-          </div>
-        </div>
-        <div class="period">{c.period}</div>
-      </div>
-    ))
-  }
-
-  {
-    PUBLICATIONS.length > 0 && (
-      <>
-        <h2 class="section-title">Publications</h2>
-        <ol class="pubs">
-          {PUBLICATIONS.map((p) => {
-            const links = p.links.filter((l) => l.href);
-            return (
-              <li class="pub">
-                {p.icon && (
-                  <span class="logo-tile"><img src={p.icon} alt="arXiv" loading="lazy" decoding="async" /></span>
-                )}
-                <div class="pub-body">
-                  <div class="title">{p.title}</div>
-                  {p.authors && (
-                    <div class="authors" set:html={p.authors.replace(/Jie-Kai Chang/g, '<span class="me">Jie-Kai Chang</span>')} />
-                  )}
-                  <div class="venue">{[p.venue, p.year].filter(Boolean).join(', ')}</div>
-                  {links.length > 0 && (
-                    <div class="refs">
-                      {links.map((l) => (
-                        <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
-                      ))}
-                    </div>
-                  )}
+      <div class="section-content">
+        <div class="work-list">
+          {
+            OPENSOURCE.map((proj) => (
+              <article class="work-entry">
+                <div class="work-entry__meta">
+                  <span>{proj.role}</span>
+                  <span>{proj.period}</span>
                 </div>
-              </li>
-            );
-          })}
-        </ol>
-      </>
-    )
-  }
-
-  <h2 class="section-title">Talks &amp; Articles</h2>
-  <ul class="talks">
-    {
-      TALKS.map((t) => (
-        <li>
-          {t.href ? (
-            <a href={t.href} target="_blank" rel="noopener">{t.title}</a>
-          ) : (
-            <span>{t.title}</span>
-          )}
-          {t.venue && <span class="venue"> — {t.venue}</span>}
-        </li>
-      ))
-    }
-  </ul>
-
-  <h2 class="section-title">Education</h2>
-  {
-    EDUCATION.map((e) => (
-      <div class="edu">
-        <div class="edu-left">
-          {e.icon && (
-            <span class="logo-tile sm"><img src={e.icon} alt={`${e.school} logo`} loading="lazy" decoding="async" /></span>
-          )}
-          <div>
-            <div class="school">{e.school}</div>
-            <div class="degree">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
-          </div>
+                <h3>
+                  {proj.icon && (
+                    <span class="logo-tile"><img src={proj.icon} alt="" loading="lazy" decoding="async" /></span>
+                  )}
+                  <a href={proj.href} target="_blank" rel="noopener">{proj.name}</a>
+                </h3>
+                <ul class="work-items">
+                  {proj.items.map((item) => (
+                    <li>
+                      <span set:html={item.html} />
+                      {item.links.length > 0 && (
+                        <span class="refs">
+                          {item.links.map((lk) => (
+                            <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
+                          ))}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {proj.repo && (
+                  <p class="mono-links" style="margin-top:1.2rem">
+                    <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener">Code</a>
+                  </p>
+                )}
+              </article>
+            ))
+          }
         </div>
-        <div class="period">{e.period}</div>
       </div>
-    ))
-  }
+    </section>
 
-  <h2 class="section-title">Skills</h2>
-  <div class="skills">
-    {
-      SKILLS.map((s) => (
-        <div class="skills-group">
-          <span class="label">{s.group}</span>
-          <div class="tags">
-            {s.items.map((it) => <span class="tag">{it}</span>)}
-          </div>
+    <section class="section-block section-block--tight" id="service">
+      <div class="section-rail"><h2>Leadership &amp; service</h2></div>
+      <div class="section-content">
+        <div class="row-list">
+          {
+            COMMUNITY.map((c) => (
+              <div class="row">
+                <div class="row__main">
+                  {c.icon && (
+                    <span class="logo-tile sm"><img src={c.icon} alt="" loading="lazy" decoding="async" /></span>
+                  )}
+                  <div>
+                    <div class="row__title">
+                      {c.role} ·{' '}
+                      {c.href ? <a href={c.href} target="_blank" rel="noopener">{c.org}</a> : <span>{c.org}</span>}
+                    </div>
+                    <div class="row__sub">{c.desc}</div>
+                  </div>
+                </div>
+                <div class="row__when">{c.period}</div>
+              </div>
+            ))
+          }
         </div>
-      ))
+      </div>
+    </section>
+
+    {
+      PUBLICATIONS.length > 0 && (
+        <section class="section-block section-block--tight" id="publications">
+          <div class="section-rail"><h2>Publications</h2></div>
+          <div class="section-content">
+            <div class="row-list">
+              {PUBLICATIONS.map((p) => {
+                const links = p.links.filter((l) => l.href);
+                return (
+                  <article class="pub">
+                    <div class="pub__meta">{[p.venue, p.year].filter(Boolean).join(' / ')}</div>
+                    <h3>{p.title}</h3>
+                    {p.authors && (
+                      <p class="authors" set:html={p.authors.replace(/Jie-Kai Chang/g, '<span class="me">Jie-Kai Chang</span>')} />
+                    )}
+                    {links.length > 0 && (
+                      <p class="refs">
+                        {links.map((l) => (
+                          <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
+                        ))}
+                      </p>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )
     }
+
+    <section class="section-block section-block--tight" id="talks">
+      <div class="section-rail"><h2>Talks &amp; articles</h2></div>
+      <div class="section-content">
+        <div class="row-list">
+          {
+            TALKS.map((t) => (
+              <div class="row">
+                <div class="row__main">
+                  <div class="row__title">
+                    {t.href ? <a href={t.href} target="_blank" rel="noopener">{t.title}</a> : <span>{t.title}</span>}
+                  </div>
+                </div>
+                {t.venue && <div class="row__when">{t.venue}</div>}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block section-block--tight" id="education">
+      <div class="section-rail"><h2>Education</h2></div>
+      <div class="section-content">
+        <div class="row-list">
+          {
+            EDUCATION.map((e) => (
+              <div class="row">
+                <div class="row__main">
+                  {e.icon && (
+                    <span class="logo-tile sm"><img src={e.icon} alt="" loading="lazy" decoding="async" /></span>
+                  )}
+                  <div>
+                    <div class="row__title">{e.school}</div>
+                    <div class="row__sub">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
+                  </div>
+                </div>
+                <div class="row__when">{e.period}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block section-block--tight last-section" id="skills">
+      <div class="section-rail"><h2>Skills &amp; areas</h2></div>
+      <div class="section-content">
+        <div class="skills">
+          <div class="skills-group">
+            <span class="label">Research areas</span>
+            <div class="items">{AREAS.join(' / ')}</div>
+          </div>
+          {
+            SKILLS.map((s) => (
+              <div class="skills-group">
+                <span class="label">{s.group}</span>
+                <div class="items">{s.items.join(' / ')}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
   </div>
 </BaseLayout>

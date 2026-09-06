@@ -1,61 +1,106 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import { PROFILE, TAGLINE, HOME_INTRO, HOME_AREAS } from '../data/profile';
+import {
+  PROFILE, MICRO_LABEL, ROLE_LINE, ABOUT, SIDE_NOTES,
+  RESEARCH_AREAS, RESEARCH_NOTE, CONTACT_COPY,
+} from '../data/profile';
 
 const touched = (p: any) => (p.data.updatedDate ?? p.data.pubDate).valueOf();
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => touched(b) - touched(a))
-  .slice(0, 2);
+  .slice(0, 3);
 
 const fmt = (d: Date) => d.toLocaleDateString('en-CA');
 const L = PROFILE.links;
-// "Jie-Kai Chang" -> gradient the first name, keep the rest.
-const [firstName, ...rest] = PROFILE.name.split(' ');
 ---
 
 <BaseLayout>
-  <section class="home-hero">
-    <span class="eyebrow">LLM/ML · Computer Vision · ML systems</span>
-    <h1>Hi, I'm <span class="grad">{firstName}</span> {rest.join(' ')}.</h1>
-    <p class="lead">{HOME_INTRO}</p>
-    <div class="btn-row">
-      <a class="btn primary" href="/cv/">View my CV</a>
-      <a class="btn ghost" href="/blog/">Read the blog</a>
-      <a class="btn ghost" href={L.github} target="_blank" rel="noopener">GitHub</a>
-    </div>
-    <div class="hero-areas tags">
-      {HOME_AREAS.map((a) => <span class="tag">{a}</span>)}
-    </div>
-  </section>
-
-  {
-    posts.length > 0 && (
-      <>
-        <h2 class="section-title">Latest writing</h2>
-        <div class="blog-cards">
-          {posts.map((post) => (
-            <a class="blog-card" href={`/blog/${post.id}/`}>
-              <span class="date">
-                {post.data.project && <span class="card-topic">{post.data.project}</span>}
-                {post.data.updatedDate ? `Updated ${fmt(post.data.updatedDate)}` : fmt(post.data.pubDate)}
-              </span>
-              <span class="title">{post.data.title}</span>
-              {post.data.description && <p class="excerpt">{post.data.description}</p>}
-            </a>
-          ))}
+  <div class="shell">
+    <section class="profile-intro" id="about">
+      <div class="intro-main">
+        <p class="micro-label">{MICRO_LABEL}</p>
+        <h1>{PROFILE.name}</h1>
+        <p class="role-line">{ROLE_LINE}</p>
+        <div class="bio">
+          {ABOUT.map((para) => <p set:html={para} />)}
         </div>
-        <a class="more-link" href="/blog/">All posts →</a>
-      </>
-    )
-  }
+        <p class="mono-links">
+          <a href={`mailto:${L.email}`}>Email</a><span>/</span>
+          <a href={L.github} target="_blank" rel="noopener">GitHub</a><span>/</span>
+          <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a><span>/</span>
+          <a href="/cv/">CV</a>
+        </p>
+      </div>
 
-  <div class="elsewhere">
-    <span>{TAGLINE}</span>
-    <div class="contacts">
-      <a href={`mailto:${L.email}`}>Email</a>
-      <a href={L.github} target="_blank" rel="noopener">GitHub</a>
-      <a href={L.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-    </div>
+      <aside class="intro-side">
+        {
+          SIDE_NOTES.map((n) => (
+            <div class="side-note">
+              <span>{n.label}</span>
+              <p set:html={n.html} />
+            </div>
+          ))
+        }
+        <div class="side-note">
+          <span>Contact</span>
+          <p><a href={`mailto:${L.email}`}>{L.email}</a></p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-block" id="research">
+      <div class="section-rail"><h2>Research areas</h2></div>
+      <div class="section-content">
+        <p class="section-lead">My current interests fall into two closely related areas.</p>
+        <div class="question-list">
+          {
+            RESEARCH_AREAS.map((a) => (
+              <div class="question-item">
+                <span class="question-index">{a.index}</span>
+                <div>
+                  <h3>{a.title}</h3>
+                  <p>{a.question}</p>
+                  <p class="keywords">{a.keywords}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <p class="quiet-note">{RESEARCH_NOTE}</p>
+      </div>
+    </section>
+
+    {
+      posts.length > 0 && (
+        <section class="section-block" id="writing">
+          <div class="section-rail"><h2>Recent writing</h2></div>
+          <div class="section-content">
+            <p class="section-lead">Living notes on the work as it lands.</p>
+            <div class="compact-work">
+              {posts.map((post) => (
+                <a href={`/blog/${post.id}/`}>
+                  <span>{post.data.project ?? 'Notes'}</span>
+                  <h3>{post.data.title}</h3>
+                  {post.data.description && <p>{post.data.description}</p>}
+                  <time datetime={(post.data.updatedDate ?? post.data.pubDate).toISOString()}>
+                    {post.data.updatedDate ? `Updated ${fmt(post.data.updatedDate)}` : fmt(post.data.pubDate)}
+                  </time>
+                </a>
+              ))}
+            </div>
+            <p class="section-more"><a href="/blog/">All writing →</a></p>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="section-block last-section" id="contact">
+      <div class="section-rail"><h2>Contact</h2></div>
+      <div class="section-content">
+        <p class="contact-copy">{CONTACT_COPY}</p>
+        <p class="contact-action"><a href={`mailto:${L.email}`}>{L.email}</a></p>
+      </div>
+    </section>
   </div>
 </BaseLayout>

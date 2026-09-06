@@ -9,7 +9,7 @@ interface Props {
   description?: string;
 }
 const { title, description } = Astro.props;
-const pageTitle = title ? `${title} · ${SITE.title}` : SITE.title;
+const pageTitle = title ? `${title} | ${SITE.author}` : `${SITE.author} | ${SITE.subtitle}`;
 const pageDesc = description ?? SITE.description;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -19,12 +19,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f4ef" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans:wght@400;500;600&display=swap"
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -38,9 +46,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <Header />
     <main>
-      <div class="wrap">
-        <slot />
-      </div>
+      <slot />
     </main>
     <Footer />
   </body>

@@ -1,16 +1,22 @@
 // Site-wide constants — edit here.
 export const SITE = {
-  title: "Jie-Kai's Website",
+  title: "Jie-Kai Chang",
   author: 'Jie-Kai Chang',
+  // Short field shown after the wordmark in the header, and in the default <title>.
+  subtitle: 'Electrical Engineering',
+  affiliation: 'Electrical Engineering / YZU',
+  repo: 'https://github.com/400Ping/400Ping.github.io',
   tagline: 'Research across distributed systems, parallel computing, inference, reinforcement learning, multimodal and the infrastructure behind it.',
   description:
-    'Jie-Kai Chang (400Ping) — research across distributed systems, parallel computing, Kubernetes, distributed ML, inference, RL, and multimodal, plus the AI/ML infrastructure behind it. Apache Mahout PMC & Committer; Ray / KubeRay contributor.',
+    'Jie-Kai Chang (400Ping) — open-source ML systems engineer and EE undergraduate at Yuan Ze University, working on distributed systems, Kubernetes-native ML infrastructure, and GPU systems. Vice President (PMC Chair) of Apache Mahout; Ray / KubeRay member.',
 };
 
 export const NAV_LINKS = [
-  { href: '/', label: 'Home' },
-  { href: '/blog/', label: 'Blog' },
+  { href: '/#about', label: 'About' },
+  { href: '/#research', label: 'Research' },
+  { href: '/blog/', label: 'Writing' },
   { href: '/cv/', label: 'CV' },
+  { href: '/#contact', label: 'Contact' },
 ];
 
 export const SOCIAL_LINKS = [
