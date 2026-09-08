@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProfileLinks from './ProfileLinks.astro';
+import { getCollection } from 'astro:content';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = t(lang).blog;
+
+const fmt = (d: Date) => d.toLocaleDateString('en-CA');
+const touched = (p: any) => (p.data.updatedDate ?? p.data.pubDate).valueOf();
+
+const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+// Group by topic/project, newest-touched first within and across groups.
+const groupsMap = new Map<string, typeof posts>();
+for (const post of posts) {
+  const key = post.data.project ?? ui.notes;
+  if (!groupsMap.has(key)) groupsMap.set(key, []);
+  groupsMap.get(key)!.push(post);
+}
+const groups = [...groupsMap.entries()]
+  .map(([topic, items]) => ({
+    topic,
+    items: items.sort((a, b) => touched(b) - touched(a)),
+  }))
+  .sort((a, b) => touched(b.items[0]) - touched(a.items[0]));
+---
+
+<BaseLayout lang={lang} title={ui.title} description={ui.description}>
+  <div class="shell shell--wide">
+    <header class="page-intro">
+      <p class="micro-label">{ui.micro}</p>
+      <h1>{ui.h1}</h1>
+      <p class="page-lead" set:html={ui.lead} />
+      <ProfileLinks lang={lang} />
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p class="quiet-note">{ui.noPosts}</p>
+      ) : (
+        groups.map((group, i) => (
+          <section class:list={['section-block', 'section-block--tight', { 'last-section': i === groups.length - 1 }]}>
+            <div class="section-rail">
+              <h2>{group.topic}</h2>
+              <span class="rail-note">{ui.count(group.items.length)}</span>
+            </div>
+            <div class="section-content">
+              <ul class="post-list">
+                {group.items.map((post) => {
+                  const updated = post.data.updatedDate;
+                  return (
+                    <li>
+                      <div>
+                        <div class="pl-title"><a href={`/blog/${post.id}/`}>{post.data.title}</a></div>
+                        {post.data.description && <span class="pl-desc">{post.data.description}</span>}
+                      </div>
+                      <time datetime={(updated ?? post.data.pubDate).toISOString()}>
+                        {updated ? `${ui.updated} ${fmt(updated)}` : fmt(post.data.pubDate)}
+                      </time>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </section>
+        ))
+      )
+    }
+  </div>
+</BaseLayout>

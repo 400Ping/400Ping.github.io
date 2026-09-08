@@ -1,21 +1,28 @@
 ---
 import { SITE } from '../consts';
+import { LANGS, LANG_META, DEFAULT_LANG, switchLang, t, type Lang } from '../i18n';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 
 interface Props {
+  lang?: Lang;
   title?: string;
   description?: string;
 }
-const { title, description } = Astro.props;
-const pageTitle = title ? `${title} | ${SITE.author}` : `${SITE.author} | ${SITE.subtitle}`;
-const pageDesc = description ?? SITE.description;
+const { lang = DEFAULT_LANG, title, description } = Astro.props;
+const ui = t(lang);
+const pageTitle = title ? `${title} | ${SITE.author}` : `${SITE.author} | ${ui.site.subtitle}`;
+const pageDesc = description ?? ui.site.description;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternates = LANGS.map((l) => ({
+  hreflang: LANG_META[l].htmlLang,
+  href: new URL(switchLang(Astro.url.pathname, l), Astro.site),
+}));
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={LANG_META[lang].htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,13 +32,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{pageTitle}</title>
     <meta name="description" content={pageDesc} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
     <link rel="alternate" type="application/rss+xml" title={SITE.title} href="/rss.xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@500;600&display=swap"
     />
 
     <!-- Open Graph -->
@@ -44,10 +52,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <Header />
+    <Header lang={lang} />
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

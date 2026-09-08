@@ -1,0 +1,190 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProfileLinks from './ProfileLinks.astro';
+import { getContent } from '../data';
+import { t, type Lang } from '../i18n';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const ui = t(lang).cv;
+const { PROFILE, AREAS, OPENSOURCE, PUBLICATIONS, COMMUNITY, TALKS, EDUCATION, SKILLS } = getContent(lang);
+---
+
+<BaseLayout lang={lang} title={ui.title} description={ui.description}>
+  <div class="shell shell--wide">
+    <header class="page-intro">
+      <p class="micro-label">{ui.micro} / {PROFILE.location}</p>
+      <h1>{ui.h1}</h1>
+      <p class="page-lead">{PROFILE.identity.join(' · ')}{lang === 'en' ? '.' : '。'}</p>
+      <ProfileLinks lang={lang} omit={['cv']} />
+    </header>
+
+    <section class="section-block section-block--tight" id="experience">
+      <div class="section-rail">
+        <h2>{ui.experience}</h2>
+        <span class="rail-note">{ui.projects(OPENSOURCE.length)}</span>
+      </div>
+      <div class="section-content">
+        <div class="work-list">
+          {
+            OPENSOURCE.map((proj) => (
+              <article class="work-entry">
+                <div class="work-entry__meta">
+                  <span>{proj.role}</span>
+                  <span>{proj.period}</span>
+                </div>
+                <h3>
+                  {proj.icon && (
+                    <span class="logo-tile"><img src={proj.icon} alt="" loading="lazy" decoding="async" /></span>
+                  )}
+                  <a href={proj.href} target="_blank" rel="noopener">{proj.name}</a>
+                </h3>
+                <ul class="work-items">
+                  {proj.items.map((item) => (
+                    <li>
+                      <span set:html={item.html} />
+                      {item.links.length > 0 && (
+                        <span class="refs">
+                          {item.links.map((lk) => (
+                            <a href={lk.href} target="_blank" rel="noopener">{lk.label}</a>
+                          ))}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {proj.repo && (
+                  <p class="mono-links" style="margin-top:1.2rem">
+                    <a href={`https://github.com/${proj.repo}`} target="_blank" rel="noopener">{ui.code}</a>
+                  </p>
+                )}
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block section-block--tight" id="service">
+      <div class="section-rail"><h2>{ui.service}</h2></div>
+      <div class="section-content">
+        <div class="row-list">
+          {
+            COMMUNITY.map((c) => (
+              <div class="row">
+                <div class="row__main">
+                  {c.icon && (
+                    <span class="logo-tile sm"><img src={c.icon} alt="" loading="lazy" decoding="async" /></span>
+                  )}
+                  <div>
+                    <div class="row__title">
+                      {c.role} ·{' '}
+                      {c.href ? <a href={c.href} target="_blank" rel="noopener">{c.org}</a> : <span>{c.org}</span>}
+                    </div>
+                    <div class="row__sub">{c.desc}</div>
+                  </div>
+                </div>
+                <div class="row__when">{c.period}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    {
+      PUBLICATIONS.length > 0 && (
+        <section class="section-block section-block--tight" id="publications">
+          <div class="section-rail"><h2>{ui.publications}</h2></div>
+          <div class="section-content">
+            <div class="row-list">
+              {PUBLICATIONS.map((p) => {
+                const links = p.links.filter((l) => l.href);
+                return (
+                  <article class="pub">
+                    <div class="pub__meta">{[p.venue, p.year].filter(Boolean).join(' / ')}</div>
+                    <h3>{p.title}</h3>
+                    {p.authors && (
+                      <p class="authors" set:html={p.authors.replace(/Jie-Kai Chang/g, '<span class="me">Jie-Kai Chang</span>')} />
+                    )}
+                    {links.length > 0 && (
+                      <p class="refs">
+                        {links.map((l) => (
+                          <a href={l.href} target="_blank" rel="noopener">{l.label}</a>
+                        ))}
+                      </p>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="section-block section-block--tight" id="talks">
+      <div class="section-rail"><h2>{ui.talks}</h2></div>
+      <div class="section-content">
+        <div class="row-list">
+          {
+            TALKS.map((tk) => (
+              <div class="row">
+                <div class="row__main">
+                  <div class="row__title">
+                    {tk.href ? <a href={tk.href} target="_blank" rel="noopener">{tk.title}</a> : <span>{tk.title}</span>}
+                  </div>
+                </div>
+                {tk.venue && <div class="row__when">{tk.venue}</div>}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block section-block--tight" id="education">
+      <div class="section-rail"><h2>{ui.education}</h2></div>
+      <div class="section-content">
+        <div class="row-list">
+          {
+            EDUCATION.map((e) => (
+              <div class="row">
+                <div class="row__main">
+                  {e.icon && (
+                    <span class="logo-tile sm"><img src={e.icon} alt="" loading="lazy" decoding="async" /></span>
+                  )}
+                  <div>
+                    <div class="row__title">{e.school}</div>
+                    <div class="row__sub">{e.degree}{e.note ? ` · ${e.note}` : ''}</div>
+                  </div>
+                </div>
+                <div class="row__when">{e.period}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block section-block--tight last-section" id="skills">
+      <div class="section-rail"><h2>{ui.skills}</h2></div>
+      <div class="section-content">
+        <div class="skills">
+          <div class="skills-group">
+            <span class="label">{ui.researchAreas}</span>
+            <div class="items">{AREAS.join(' / ')}</div>
+          </div>
+          {
+            SKILLS.map((s) => (
+              <div class="skills-group">
+                <span class="label">{s.group}</span>
+                <div class="items">{s.items.join(' / ')}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

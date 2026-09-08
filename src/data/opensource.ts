@@ -17,7 +17,7 @@ export const OPENSOURCE = [
       },
       {
         html: `Co-create QDP (Quantum Data Plane), a GPU-accelerated data plane for encoding classical datasets into quantum states.`,
-        links: [{ label: 'qumat-qdp', href: 'https://pypi.org/project/qumat-qdp/' }],
+        links: [],
       },
       {
         html: `Initiate collaboration with AMD Taiwan and ITRI on AMD GPU enablement and validation.`,

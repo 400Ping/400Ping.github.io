@@ -1,27 +1,48 @@
 ---
 import { SITE, NAV_LINKS, SOCIAL_LINKS } from '../consts';
+import { LANGS, LANG_META, DEFAULT_LANG, localePath, switchLang, t, type Lang } from '../i18n';
+
+interface Props { lang?: Lang }
+const { lang = DEFAULT_LANG } = Astro.props;
+const ui = t(lang);
 const path = Astro.url.pathname;
 // Only real pages get an active state; hash links to home sections never do.
-const isActive = (href: string) => !href.includes('#') && href !== '/' && path.startsWith(href);
+const isActive = (p: string) => !p.includes('#') && p !== '/' && path.startsWith(localePath(lang, p));
 ---
 
 <header class="site-header" aria-label="Primary navigation">
   <div class="site-header__inner">
-    <a class="wordmark" href="/">{SITE.author}</a>
-    <span class="affiliation">{SITE.affiliation}</span>
+    <a class="wordmark" href={localePath(lang, '/')}>{SITE.author}</a>
+    <span class="affiliation">{ui.site.affiliation}</span>
+    <div class="nav-row">
     <nav class="primary-nav" aria-label="Sections">
       {
         NAV_LINKS.map((link) => (
           <a
-            href={link.href}
-            class:list={[{ 'is-active': isActive(link.href) }]}
-            aria-current={isActive(link.href) ? 'page' : undefined}
+            href={localePath(lang, link.path)}
+            class:list={[{ 'is-active': isActive(link.path) }]}
+            aria-current={isActive(link.path) ? 'page' : undefined}
           >
-            {link.label}
+            {ui.nav[link.key]}
           </a>
         ))
       }
     </nav>
+    <nav class="language-nav" aria-label="Language">
+      {
+        LANGS.map((l) => (
+          <a
+            href={switchLang(path, l)}
+            lang={LANG_META[l].htmlLang}
+            class:list={[{ 'is-active': l === lang }]}
+            aria-current={l === lang ? 'page' : undefined}
+          >
+            {LANG_META[l].label}
+          </a>
+        ))
+      }
+    </nav>
+    </div>
     <nav class="profile-nav" aria-label="Profiles">
       {
         SOCIAL_LINKS.map((link) => (
@@ -30,6 +51,7 @@ const isActive = (href: string) => !href.includes('#') && href !== '/' && path.s
           </a>
         ))
       }
+      <a href={SITE.cvUrl} target="_blank" rel="noopener">{ui.links.pdf}</a>
     </nav>
   </div>
 </header>

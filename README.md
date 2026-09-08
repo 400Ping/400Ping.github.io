@@ -1,7 +1,7 @@
 # Jie-Kai Chang's Website
 
-Personal website — a profile page, a CV, and a blog of living notes. Built with
-[Astro](https://astro.build/) and deployed to GitHub Pages.
+Personal website — a profile page, a CV, and a blog of living notes, in English (`/`) and
+Traditional Chinese (`/zh-tw/`). Built with [Astro](https://astro.build/) and deployed to GitHub Pages.
 
 The look is an "editorial paper" style paper background, Newsreader serif headings, Noto Sans body, IBM Plex Mono labels, hairline rules, square corners, no cards, badges, or dark mode. All of it lives in one stylesheet.
 
@@ -34,26 +34,38 @@ Leave `npm run dev` running while you edit; the browser refreshes automatically 
 ```
 src/
   pages/
-    index.astro        Home: profile intro + side notes, research areas, recent writing, contact
-    cv.astro           CV (experience, community, publications, talks, education, skills)
+    index.astro        English home  → renders components/HomePage.astro
+    cv.astro           English CV    → renders components/CvPage.astro
+    blog/index.astro   English blog  → renders components/BlogIndexPage.astro
+    blog/[...slug].astro  Each blog post (posts are English-only)
+    zh-tw/             Same three pages in Traditional Chinese (thin wrappers, lang="zh-tw")
     404.astro          Not-found page
-    blog/
-      index.astro      Writing index (posts grouped by topic)
-      [...slug].astro  Renders each individual post
+  components/
+    HomePage / CvPage / BlogIndexPage   The actual page markup, parameterised by language
+    Header / Footer / ProfileLinks      Shared chrome (nav, language switch, link row)
+  i18n.ts              Languages, URL helpers, and all UI labels (nav, headings, buttons) per language
   data/                All editable content lives here (plain data files):
-    profile.ts           name, role line, bio, side notes, research areas, contact copy
-    opensource.ts        Open-source experience (one entry per project)
-    misc.ts              community roles, publications, talks, education, skills
+    profile.ts           EN: name, role line, bio, side notes, research areas, contact copy
+    opensource.ts        EN: open-source experience (one entry per project)
+    misc.ts              EN: community roles, publications, talks, education, skills
+    zh-tw/               The same three files in Traditional Chinese (identical shape)
+    index.ts             Picks the EN or zh-tw bundle for a page
     news.ts              news items (currently not rendered anywhere)
   content/blog/        Blog posts — one Markdown file per post
-  components/          Header / Footer
   layouts/             Shared page shell (BaseLayout.astro)
   styles/global.css    All styling
 public/                Static files served as-is (favicon, icons/, images)
 ```
 
 **To edit page text** (bio, research areas, experience, talks, etc.), change the files in
-`src/data/`. You rarely need to touch the `.astro` pages.
+`src/data/` — and make the same change in `src/data/zh-tw/` so both languages stay in sync.
+Section headings, nav labels, and other UI wording live in `src/i18n.ts`. You rarely need to
+touch the `.astro` pages.
+
+**Languages.** English is served at `/`, Traditional Chinese at `/zh-tw/`; the header has an
+EN / 繁 switch that jumps to the same page in the other language. Blog posts are written once
+(in whichever language you like) and shared by both editions — the Chinese blog index simply
+lists the same posts.
 
 ---
 
@@ -194,9 +206,10 @@ git push
 
 | I want to change…                     | Edit this |
 | ------------------------------------- | --------- |
-| Name, role line, bio, side notes, research questions, contact copy | `src/data/profile.ts` |
-| Open-source experience entries        | `src/data/opensource.ts` |
-| Community, publications, talks, education, skills | `src/data/misc.ts` |
+| Name, role line, bio, side notes, research questions, contact copy | `src/data/profile.ts` (+ `zh-tw/profile.ts`) |
+| Open-source experience entries        | `src/data/opensource.ts` (+ `zh-tw/opensource.ts`) |
+| Community, publications, talks, education, skills | `src/data/misc.ts` (+ `zh-tw/misc.ts`) |
+| Nav labels, section headings, UI wording per language | `src/i18n.ts` |
 | Nav links / header affiliation / social links / source-repo link | `src/consts.ts` |
 | Colors, fonts, spacing (design tokens in `:root`) | `src/styles/global.css` |
 | Project / school logos                | drop a PNG in `public/icons/` and point the `icon:` field at it |

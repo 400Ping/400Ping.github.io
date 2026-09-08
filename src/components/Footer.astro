@@ -1,12 +1,16 @@
 ---
 import { SITE } from '../consts';
+import { DEFAULT_LANG, t, type Lang } from '../i18n';
+interface Props { lang?: Lang }
+const { lang = DEFAULT_LANG } = Astro.props;
+const ui = t(lang).footer;
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <div>© {year} {SITE.author}</div>
   <div>
-    Built with <a href="https://astro.build/" target="_blank" rel="noopener">Astro</a> ·
-    <a href={SITE.repo} target="_blank" rel="noopener">Source</a>
+    {ui.builtPrefix}<a href="https://astro.build/" target="_blank" rel="noopener">Astro</a>{ui.builtSuffix} ·
+    <a href={SITE.repo} target="_blank" rel="noopener">{ui.source}</a>
   </div>
 </footer>

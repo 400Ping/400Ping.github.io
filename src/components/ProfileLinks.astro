@@ -1,0 +1,39 @@
+---
+// The one profile-link row used on every page, in a fixed order:
+// Email / LinkedIn / GitHub / CV / PDF ↓
+// Pass `omit` to hide an entry (e.g. omit={['cv']} on the CV page itself).
+import { SITE } from '../consts';
+import { PROFILE } from '../data/profile';
+import { DEFAULT_LANG, localePath, t, type Lang } from '../i18n';
+
+interface Props {
+  lang?: Lang;
+  omit?: string[];
+  class?: string;
+}
+const { lang = DEFAULT_LANG, omit = [], class: extra } = Astro.props;
+const ui = t(lang).links;
+const L = PROFILE.links;
+
+const ALL = [
+  { key: 'email', label: ui.email, href: `mailto:${L.email}`, external: false },
+  { key: 'linkedin', label: ui.linkedin, href: L.linkedin, external: true },
+  { key: 'github', label: ui.github, href: L.github, external: true },
+  { key: 'cv', label: ui.cv, href: localePath(lang, '/cv/'), external: false },
+  { key: 'pdf', label: ui.pdf, href: SITE.cvUrl, external: true },
+];
+const links = ALL.filter((l) => !omit.includes(l.key));
+---
+
+<p class:list={['mono-links', extra]}>
+  {
+    links.map((l, i) => (
+      <>
+        {i > 0 && <span>/</span>}
+        <a href={l.href} target={l.external ? '_blank' : undefined} rel={l.external ? 'noopener' : undefined}>
+          {l.label}
+        </a>
+      </>
+    ))
+  }
+</p>
