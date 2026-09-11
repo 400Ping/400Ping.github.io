@@ -17,7 +17,7 @@ export const PROFILE = {
 export const MICRO_LABEL = '個人檔案 / 2026';
 
 export const ROLE_LINE =
-  '開源機器學習系統工程師，專注於分散式系統、Kubernetes 原生 ML 基礎設施與 GPU 系統。';
+  '機器學習系統工程師，專注於分散式系統、Kubernetes 原生 ML 基礎設施與 GPU 系統。';
 
 export const ABOUT = [
   `我是<strong>元智大學</strong>的大學部學生，工作橫跨研究與基礎設施。我的領域涵蓋<strong>機器學習</strong>（LLM、電腦視覺、多模態、推論、訓練、強化學習），以及支撐它們運作的<strong>系統</strong>（分散式系統、Kubernetes 原生 ML 基礎設施、GPU 系統、平行運算）。`,

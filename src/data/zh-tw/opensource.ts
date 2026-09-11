@@ -29,10 +29,10 @@ export const OPENSOURCE = [
     href: 'https://github.com/ray-project/ray',
     items: [
       { html: `（進行中）Ray Data Shuffle v2 的排序支援。`, links: [] },
+      { html: `（進行中）統一 Raylet 與 Ray Serve 之間的 RayService worker readiness 語意。`, links: [] },
       { html: `Ray Data 的 Compute Expressions，包含 datetime 與固定大小陣列的表達式命名空間。`, links: [] },
       { html: `Databricks Unity Catalog 資料來源的 schema 處理與回歸測試覆蓋。`, links: [] },
       { html: `ActorPoolMapOperator 佇列清理與可靠性改進。`, links: [] },
-      { html: `（進行中）統一 Raylet 與 Ray Serve 之間的 RayService worker readiness 語意。`, links: [] },
       { html: `GCS StoreClient 非同步 API 清理，以及 Ray Core pubsub Bazel target 拆分。`, links: [] },
     ],
   },

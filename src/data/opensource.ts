@@ -42,6 +42,10 @@ export const OPENSOURCE = [
         links: [],
       },
       {
+        html: `(Ongoing) Unified RayService worker readiness semantics across Raylet and Ray Serve.`,
+        links: [],
+      },
+      {
         html: `Compute Expressions in Ray Data, including datetime and fixed-size array expression namespaces.`,
         links: [],
       },
@@ -51,10 +55,6 @@ export const OPENSOURCE = [
       },
       {
         html: `ActorPoolMapOperator queue cleanup and reliability improvements.`,
-        links: [],
-      },
-      {
-        html: `(Ongoing) Unified RayService worker readiness semantics across Raylet and Ray Serve.`,
         links: [],
       },
       {

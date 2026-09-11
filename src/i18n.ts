@@ -33,7 +33,7 @@ export const UI = {
       subtitle: 'Electrical Engineering',
       affiliation: 'Electrical Engineering / YZU',
       description:
-        'Jie-Kai Chang (400Ping) — open-source ML systems engineer and EE undergraduate at Yuan Ze University, working on distributed systems, Kubernetes-native ML infrastructure, and GPU systems. Vice President (PMC Chair) of Apache Mahout; Ray / KubeRay member.',
+        'Jie-Kai Chang (400Ping) — ML systems engineer and EE undergraduate at Yuan Ze University, working on distributed systems, Kubernetes-native ML infrastructure, and GPU systems. Vice President (PMC Chair) of Apache Mahout; Ray / KubeRay member.',
     },
     nav: { about: 'About', research: 'Research', writing: 'Writing', cv: 'CV', contact: 'Contact' },
     links: { email: 'Email', linkedin: 'LinkedIn', github: 'GitHub', cv: 'CV', pdf: 'PDF ↓' },
@@ -51,7 +51,7 @@ export const UI = {
     cv: {
       title: 'CV',
       micro: 'Curriculum vitae',
-      h1: 'Public work, organized by project.',
+      h1: 'Public work',
       description: 'Jie-Kai Chang — CV: open-source experience, leadership and service, publications, talks, education, and skills.',
       experience: 'Experience',
       projects: (n: number) => `${n} projects`,
@@ -81,7 +81,7 @@ export const UI = {
       subtitle: '電機工程',
       affiliation: '電機工程 / 元智大學',
       description:
-        'Jie-Kai Chang（400Ping）— 開源機器學習系統工程師、元智大學電機工程學系學生，專注於分散式系統、Kubernetes 原生 ML 基礎設施與 GPU 系統。Apache Mahout 副總裁（PMC 主席）；Ray / KubeRay 成員。',
+        'Jie-Kai Chang（400Ping）— 機器學習系統工程師、元智大學電機工程學系學生，專注於分散式系統、Kubernetes 原生 ML 基礎設施與 GPU 系統。Apache Mahout 副總裁（PMC 主席）；Ray / KubeRay 成員。',
     },
     nav: { about: '關於', research: '研究', writing: '文章', cv: '履歷', contact: '聯絡' },
     links: { email: 'Email', linkedin: 'LinkedIn', github: 'GitHub', cv: '履歷', pdf: 'PDF ↓' },
@@ -99,7 +99,7 @@ export const UI = {
     cv: {
       title: '履歷',
       micro: '履歷',
-      h1: '公開的工作，依專案整理。',
+      h1: '公開的工作',
       description: 'Jie-Kai Chang 的履歷：開源經歷、領導與服務、論文、演講、學歷與技能。',
       experience: '經歷',
       projects: (n: number) => `${n} 個專案`,

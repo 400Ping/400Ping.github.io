@@ -20,7 +20,7 @@ export const MICRO_LABEL = 'Profile / 2026';
 
 // One-line role under the name (serif, large).
 export const ROLE_LINE =
-  'Open-source ML systems engineer working on distributed systems, Kubernetes-native ML infrastructure, and GPU systems.';
+  'ML systems engineer working on distributed systems, Kubernetes-native ML infrastructure, and GPU systems.';
 
 // Bio paragraphs (HTML allowed). Used on the home page.
 export const ABOUT = [
